@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://biicec4xpag0v"]
+
+[ext_resource type="Texture2D" uid="uid://fdbdmg3l5t4m" path="res://assets/sprites/enemy.png" id="1_7p1mj"]
+[ext_resource type="Script" uid="uid://b6w3j3bv5og3d" path="res://scripts/enemy.gd" id="1_md0e3"]
+[ext_resource type="PackedScene" uid="uid://c5v17ylj0t853" path="res://scenes/projectile.tscn" id="2_4ra3w"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8tegq"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"die",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_7p1mj")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7p1mj"]
+size = Vector2(120, 266)
+
+[node name="Enemy" type="Area2D"]
+collision_layer = 2
+script = ExtResource("1_md0e3")
+_bullet = ExtResource("2_4ra3w")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-10, -101)
+scale = Vector2(0.107843, 0.107199)
+sprite_frames = SubResource("SpriteFrames_8tegq")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -123)
+shape = SubResource("RectangleShape2D_7p1mj")

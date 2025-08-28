@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://dvke3s2413ele"]
+
+[ext_resource type="Texture2D" uid="uid://ifsclfax24f2" path="res://assets/sprites/Vendetta_01_Idle_Pose.png" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://dqvhx7oigbhsi" path="res://scripts/player.gd" id="1_g2els"]
+[ext_resource type="PackedScene" uid="uid://c5v17ylj0t853" path="res://scenes/projectile.tscn" id="3_qhqgy"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3vyb7"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"die",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_3vyb7")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u8vuu"]
+size = Vector2(128, 221)
+
+[node name="Player" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_g2els")
+_bullet = ExtResource("3_qhqgy")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(9, -96)
+scale = Vector2(0.0980392, 0.0958706)
+sprite_frames = SubResource("SpriteFrames_3vyb7")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -110)
+shape = SubResource("RectangleShape2D_u8vuu")

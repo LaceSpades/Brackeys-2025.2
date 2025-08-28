@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://vq7dgv26b7yt"]
+
+[ext_resource type="Script" uid="uid://egj1tfdw38n3" path="res://scripts/game_manager.gd" id="1_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://dvke3s2413ele" path="res://scenes/player.tscn" id="1_uwrxv"]
+[ext_resource type="PackedScene" uid="uid://biicec4xpag0v" path="res://scenes/enemy.tscn" id="2_yqjtg"]
+
+[node name="Game" type="Node2D"]
+
+[node name="GameManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_lnu2h")
+
+[node name="Timer" type="Timer" parent="GameManager"]
+wait_time = 3.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("1_uwrxv")]
+position = Vector2(-461, 261)
+
+[node name="Enemy" parent="." instance=ExtResource("2_yqjtg")]
+position = Vector2(448, 280)
+
+[connection signal="timeout" from="GameManager/Timer" to="GameManager" method="_on_timer_timeout"]
