@@ -14,15 +14,15 @@ grow_vertical = 2
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
 offset_top = -5.0
-offset_right = 1151.0
-offset_bottom = 651.0
+offset_right = 1924.0
+offset_bottom = 1078.0
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 489.0
-offset_top = 288.0
-offset_right = 667.0
-offset_bottom = 356.0
+offset_left = 900.0
+offset_top = 514.0
+offset_right = 1078.0
+offset_bottom = 582.0
 text = "Start Game"
 script = ExtResource("1_l6cm7")
 

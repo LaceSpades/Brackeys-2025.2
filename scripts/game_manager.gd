@@ -1,13 +1,19 @@
 extends Node
 class_name GameManager
 
-@onready var enemy: Enemy = $Enemy
+@export var grey_enemy: PackedScene
+@export var red_enemy: PackedScene
+@export var blue_enemy: PackedScene
+@export var yellow_enemy: PackedScene
+
 @onready var player: Player = $Player
 @onready var transition: Sprite2D = $Transition
 @onready var round_timer: Timer = $RoundTimer
 @onready var label: Label = $Label
 @onready var label_3: Label = $Label3
 var rng = RandomNumberGenerator.new()
+var enemies: Array
+var current_enemy: Enemy
 
 func _ready() -> void:
 	Globals.reset_player_lives()
@@ -15,12 +21,22 @@ func _ready() -> void:
 	transition.self_modulate.a = 0
 	update_score()
 	update_lives()
-	start_round()
+	prepare_run()
+	start_encounter()
 	
 func prepare_run() -> void:
 	# Setup multiple encounters in a run
 	for n in rng.randi_range(3, 6):
-		pass
+		var enemy_choice = rng.randi_range(0, 3)
+		match enemy_choice:
+			0:
+				enemies.append(grey_enemy.instantiate())
+			1:
+				enemies.append(red_enemy.instantiate())
+			2:
+				enemies.append(yellow_enemy.instantiate())
+			3:
+				enemies.append(blue_enemy.instantiate())
 	
 func update_score() -> void:
 	label.text = str(Globals.score)
@@ -28,13 +44,23 @@ func update_score() -> void:
 func update_lives() -> void:
 	label_3.text = str(Globals.player_lives)
 	
+func start_encounter() -> void:
+	current_enemy = enemies.pop_front()
+	current_enemy.global_position.x = 443.0
+	current_enemy.global_position.y = 312.0
+	add_child(current_enemy)
+	
+	start_round()
+	
 func start_round() -> void:
-	enemy.begin_attack()
+	current_enemy.round_reset()
+	player.round_reset()
+	current_enemy.begin_attack()
 	
 func player_attacks() -> void:
 	# Check if enemy has warned
-	if not enemy.warned_player:
-		enemy.stop_timers()
+	if not current_enemy.warned_player:
+		current_enemy.stop_timers()
 		
 func player_hit() -> void:
 	player.health -= 1
@@ -48,16 +74,15 @@ func player_hit() -> void:
 
 func enemy_hit() -> void:
 	# Punish player for attacking before being warned
-	if enemy.warned_player:
+	if current_enemy.warned_player:
 		Globals.score += 1
 	else:
 		Globals.score -= 1
-	enemy.stop_timers()
+	current_enemy.stop_timers()
 	
-	enemy.health -= 1
-	if enemy.health <= 0:
-		enemy.die()
-	
+	current_enemy.health -= 1
+	if current_enemy.health <= 0:
+		current_enemy.die()
 	end_round()
 	
 func bullet_hit() -> void:
@@ -69,12 +94,17 @@ func end_round() -> void:
 	round_timer.start()
 			
 func end_encounter() -> void:
-	# TODO Don't immediatly reset scene
-	get_tree().call_deferred("change_scene_to_file", "res://scenes/main_menu.tscn")
+	if enemies.size() > 0:
+		current_enemy.queue_free()
+		start_encounter()
+	else:
+		get_tree().call_deferred("change_scene_to_file", "res://scenes/main_menu.tscn")
 
 func _on_round_timer_timeout() -> void:
+	transition.self_modulate.a = 0
+	
 	# Enemy is dead the fight is over
-	if enemy.health <= 0:
+	if current_enemy.health <= 0:
 		end_encounter()
 	elif player.health <= 0:
 		if Globals.player_lives <= 0:
@@ -85,7 +115,3 @@ func _on_round_timer_timeout() -> void:
 	else:
 		# Prepare new round
 		start_round()
-	
-	player.round_reset()
-	enemy.round_reset()
-	transition.self_modulate.a = 0

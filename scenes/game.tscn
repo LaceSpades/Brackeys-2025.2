@@ -1,10 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://vq7dgv26b7yt"]
+[gd_scene load_steps=13 format=3 uid="uid://vq7dgv26b7yt"]
 
 [ext_resource type="Script" uid="uid://egj1tfdw38n3" path="res://scripts/game_manager.gd" id="1_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://dvke3s2413ele" path="res://scenes/player.tscn" id="1_uwrxv"]
+[ext_resource type="PackedScene" uid="uid://biicec4xpag0v" path="res://scenes/enemy.tscn" id="2_kvpfn"]
 [ext_resource type="Texture2D" uid="uid://dmyvqgxrrjp8g" path="res://assets/sprites/projectile.png" id="2_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://dq3ypswluf2dp" path="res://scenes/red_enemy.tscn" id="3_dinhu"]
 [ext_resource type="LabelSettings" uid="uid://cuu3sarie1ety" path="res://assets/fonts/game.tres" id="5_gee14"]
 [ext_resource type="Texture2D" uid="uid://dbm5753mpgoe1" path="res://assets/sprites/score_overlay.png" id="5_iywne"]
+[ext_resource type="PackedScene" uid="uid://dk5qragwbmcig" path="res://scenes/yellow_enemy.tscn" id="5_kvuet"]
 [ext_resource type="AudioStream" uid="uid://b5a1xsqcnqn25" path="res://assets/music/game.wav" id="6_p57ef"]
 [ext_resource type="PackedScene" uid="uid://cg3o8hpbrgk6c" path="res://scenes/blue_enemy.tscn" id="6_u5sy4"]
 [ext_resource type="Texture2D" uid="uid://dnlidkyb17n16" path="res://assets/sprites/score_overlay_blank.png" id="7_u5sy4"]
@@ -15,6 +18,10 @@ font_color = Color(1, 0.0166667, 0, 1)
 
 [node name="GameManager" type="Node"]
 script = ExtResource("1_lnu2h")
+grey_enemy = ExtResource("2_kvpfn")
+red_enemy = ExtResource("3_dinhu")
+blue_enemy = ExtResource("6_u5sy4")
+yellow_enemy = ExtResource("5_kvuet")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -26,9 +33,9 @@ position = Vector2(-416, 315)
 game_manager = NodePath("..")
 
 [node name="Transition" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(3.5, 2)
-scale = Vector2(3.25833, 2.0679)
+z_index = 1
+position = Vector2(-3.74973, -0.499924)
+scale = Vector2(5.35972, 3.34876)
 texture = ExtResource("2_lbhrr")
 
 [node name="ScoreOverlay" type="Sprite2D" parent="."]
@@ -48,9 +55,6 @@ horizontal_alignment = 2
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_p57ef")
 autoplay = true
-
-[node name="Enemy" parent="." instance=ExtResource("6_u5sy4")]
-position = Vector2(443, 312)
 
 [node name="ScoreOverlayBlank" type="Sprite2D" parent="."]
 position = Vector2(403, -239)

@@ -15,24 +15,24 @@ grow_vertical = 2
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
 offset_top = -5.0
-offset_right = 1151.0
-offset_bottom = 651.0
+offset_right = 1941.0
+offset_bottom = 1099.0
 
 [node name="Return To Menu" type="Button" parent="."]
 layout_mode = 0
-offset_left = 495.0
-offset_top = 339.0
-offset_right = 673.0
-offset_bottom = 407.0
+offset_left = 890.0
+offset_top = 579.0
+offset_right = 1068.0
+offset_bottom = 647.0
 text = "Return To Menu"
 script = ExtResource("1_wqhvx")
 
 [node name="Restart" type="Button" parent="."]
 layout_mode = 0
-offset_left = 494.0
-offset_top = 180.0
-offset_right = 672.0
-offset_bottom = 248.0
+offset_left = 893.0
+offset_top = 290.0
+offset_right = 1071.0
+offset_bottom = 358.0
 text = "Restart"
 script = ExtResource("2_wqhvx")
 
