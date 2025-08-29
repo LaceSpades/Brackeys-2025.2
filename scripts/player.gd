@@ -10,6 +10,9 @@ var health = 1;
 
 func round_reset() -> void:
 	shot = false
+	health = 1
+	animated_sprite_2d.rotation = 0
+	animated_sprite_2d.animation = "idle"
 
 func reset() -> void:
 	shot = false
@@ -25,7 +28,9 @@ func _process(delta: float) -> void:
 			bullet.set_collision_mask_value(2, true)
 			bullet.game_manager = game_manager
 			shot = true
+			animated_sprite_2d.animation = "attack"
 			game_manager.player_attacks()
 		
 func die() -> void:
 	animated_sprite_2d.rotation = -90
+	Globals.player_lives -= 1

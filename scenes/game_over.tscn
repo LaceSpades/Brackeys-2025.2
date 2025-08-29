@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0lhvf74c84j4"]
+
+[ext_resource type="Script" uid="uid://cek03g1n1oowd" path="res://scripts/return_to_menu.gd" id="1_wqhvx"]
+[ext_resource type="Script" uid="uid://dsrk42toig50w" path="res://scripts/restart.gd" id="2_wqhvx"]
+[ext_resource type="AudioStream" uid="uid://bfrfhayyfg1rw" path="res://assets/music/menu.wav" id="3_tbwuq"]
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_top = -5.0
+offset_right = 1151.0
+offset_bottom = 651.0
+
+[node name="Return To Menu" type="Button" parent="."]
+layout_mode = 0
+offset_left = 495.0
+offset_top = 339.0
+offset_right = 673.0
+offset_bottom = 407.0
+text = "Return To Menu"
+script = ExtResource("1_wqhvx")
+
+[node name="Restart" type="Button" parent="."]
+layout_mode = 0
+offset_left = 494.0
+offset_top = 180.0
+offset_right = 672.0
+offset_bottom = 248.0
+text = "Restart"
+script = ExtResource("2_wqhvx")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_tbwuq")
+autoplay = true
+
+[connection signal="pressed" from="Return To Menu" to="Return To Menu" method="_on_pressed"]
+[connection signal="pressed" from="Restart" to="Restart" method="_on_pressed"]

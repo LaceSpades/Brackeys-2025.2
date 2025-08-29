@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://by0wvs4osdwgn"]
+
+[ext_resource type="Script" uid="uid://pdkfcufnbctj" path="res://scripts/start_button.gd" id="1_l6cm7"]
+[ext_resource type="AudioStream" uid="uid://bfrfhayyfg1rw" path="res://assets/music/menu.wav" id="2_ekxnf"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_top = -5.0
+offset_right = 1151.0
+offset_bottom = 651.0
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 489.0
+offset_top = 288.0
+offset_right = 667.0
+offset_bottom = 356.0
+text = "Start Game"
+script = ExtResource("1_l6cm7")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_ekxnf")
+autoplay = true
+
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]

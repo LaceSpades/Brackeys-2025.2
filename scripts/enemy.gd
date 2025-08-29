@@ -1,12 +1,11 @@
 extends Area2D
 class_name Enemy
 
-@export var game_manager: GameManager
 @export var _bullet : PackedScene
 @onready var warning_timer: Timer = $WarningTimer
 @onready var attack_timer: Timer = $AttackTimer
 @onready var warning: Sprite2D = $Warning
-@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var sprite: AnimatedSprite2D = $Sprite
 
 var rng: RandomNumberGenerator;
 var health = 2;
@@ -18,6 +17,7 @@ func _ready() -> void:
 func round_reset() -> void:
 	warning.visible = false
 	warned_player = false
+	sprite.animation = "idle"
 	
 func reset() -> void:
 	health = 1
@@ -42,11 +42,11 @@ func _on_attack_timer_timeout() -> void:
 	# Spawn bullet to attack player
 	var bullet : Bullet = _bullet.instantiate()
 	add_child(bullet)
-	bullet.game_manager = game_manager
+	sprite.animation = "attack"
+	bullet.game_manager = get_parent()
 	bullet.direction = -1
 	bullet.set_collision_layer_value(2, true)
 	bullet.set_collision_mask_value(1, true)
 
 func die() -> void:
-	animated_sprite_2d.rotation = 90
-	
+	sprite.rotation = 90

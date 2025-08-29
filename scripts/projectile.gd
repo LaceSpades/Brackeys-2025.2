@@ -14,8 +14,10 @@ func _on_area_entered(area: Area2D) -> void:
 	
 	if hit == "Player":
 		game_manager.player_hit()
+		self.queue_free()
 	elif hit == "Enemy":
 		game_manager.enemy_hit()
+		self.queue_free()
 	else:
 		area.queue_free()
 		game_manager.bullet_hit()

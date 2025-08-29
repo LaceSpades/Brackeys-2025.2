@@ -1,39 +1,76 @@
-[gd_scene load_steps=5 format=3 uid="uid://vq7dgv26b7yt"]
+[gd_scene load_steps=10 format=3 uid="uid://vq7dgv26b7yt"]
 
 [ext_resource type="Script" uid="uid://egj1tfdw38n3" path="res://scripts/game_manager.gd" id="1_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://dvke3s2413ele" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://dmyvqgxrrjp8g" path="res://assets/sprites/projectile.png" id="2_lbhrr"]
-[ext_resource type="PackedScene" uid="uid://biicec4xpag0v" path="res://scenes/enemy.tscn" id="2_yqjtg"]
+[ext_resource type="LabelSettings" uid="uid://cuu3sarie1ety" path="res://assets/fonts/game.tres" id="5_gee14"]
+[ext_resource type="Texture2D" uid="uid://dbm5753mpgoe1" path="res://assets/sprites/score_overlay.png" id="5_iywne"]
+[ext_resource type="AudioStream" uid="uid://b5a1xsqcnqn25" path="res://assets/music/game.wav" id="6_p57ef"]
+[ext_resource type="PackedScene" uid="uid://cg3o8hpbrgk6c" path="res://scenes/blue_enemy.tscn" id="6_u5sy4"]
+[ext_resource type="Texture2D" uid="uid://dnlidkyb17n16" path="res://assets/sprites/score_overlay_blank.png" id="7_u5sy4"]
 
-[node name="Game" type="Node2D"]
+[sub_resource type="LabelSettings" id="LabelSettings_gee14"]
+font_size = 40
+font_color = Color(1, 0.0166667, 0, 1)
 
-[node name="GameManager" type="Node" parent="."]
-unique_name_in_owner = true
+[node name="GameManager" type="Node"]
 script = ExtResource("1_lnu2h")
 
-[node name="Camera2D" type="Camera2D" parent="GameManager"]
+[node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="RoundTimer" type="Timer" parent="GameManager"]
+[node name="RoundTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="Player" parent="GameManager" node_paths=PackedStringArray("game_manager") instance=ExtResource("1_uwrxv")]
-position = Vector2(-461, 261)
+[node name="Player" parent="." node_paths=PackedStringArray("game_manager") instance=ExtResource("1_uwrxv")]
+position = Vector2(-416, 315)
 game_manager = NodePath("..")
 
-[node name="Enemy" parent="GameManager" node_paths=PackedStringArray("game_manager") instance=ExtResource("2_yqjtg")]
-position = Vector2(448, 280)
-game_manager = NodePath("..")
-
-[node name="Transition" type="Sprite2D" parent="GameManager"]
+[node name="Transition" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(3.5, 2)
 scale = Vector2(3.25833, 2.0679)
 texture = ExtResource("2_lbhrr")
 
-[node name="Label" type="Label" parent="GameManager"]
-offset_left = -543.0
-offset_top = -129.0
-offset_right = -166.0
-offset_bottom = -48.0
-text = "Score:"
+[node name="ScoreOverlay" type="Sprite2D" parent="."]
+position = Vector2(-402, -240)
+scale = Vector2(0.37, 0.37)
+texture = ExtResource("5_iywne")
 
-[connection signal="timeout" from="GameManager/RoundTimer" to="GameManager" method="_on_round_timer_timeout"]
+[node name="Label" type="Label" parent="."]
+offset_left = -610.0
+offset_top = -269.0
+offset_right = -316.0
+offset_bottom = -132.0
+text = "0"
+label_settings = ExtResource("5_gee14")
+horizontal_alignment = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_p57ef")
+autoplay = true
+
+[node name="Enemy" parent="." instance=ExtResource("6_u5sy4")]
+position = Vector2(443, 312)
+
+[node name="ScoreOverlayBlank" type="Sprite2D" parent="."]
+position = Vector2(403, -239)
+scale = Vector2(0.37, 0.37)
+texture = ExtResource("7_u5sy4")
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 452.0
+offset_top = -320.0
+offset_right = 768.0
+offset_bottom = -210.0
+text = "LIVES"
+label_settings = SubResource("LabelSettings_gee14")
+
+[node name="Label3" type="Label" parent="."]
+offset_left = 450.0
+offset_top = -272.0
+offset_right = 490.0
+offset_bottom = -176.0
+text = "5"
+label_settings = ExtResource("5_gee14")
+
+[connection signal="timeout" from="RoundTimer" to="." method="_on_round_timer_timeout"]

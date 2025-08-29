@@ -1,13 +1,20 @@
-[gd_scene load_steps=7 format=3 uid="uid://biicec4xpag0v"]
+[gd_scene load_steps=8 format=3 uid="uid://biicec4xpag0v"]
 
 [ext_resource type="Script" uid="uid://b6w3j3bv5og3d" path="res://scripts/enemy.gd" id="1_md0e3"]
 [ext_resource type="PackedScene" uid="uid://c5v17ylj0t853" path="res://scenes/projectile.tscn" id="2_4ra3w"]
 [ext_resource type="Texture2D" uid="uid://d3mdix15oveap" path="res://assets/sprites/Cannon_Head_01_Idle.png" id="3_5uy6h"]
+[ext_resource type="Texture2D" uid="uid://dpgl3hagyqjgb" path="res://assets/sprites/Cannon_Head_02_Shot_Fired.png" id="3_c4w8v"]
 [ext_resource type="Texture2D" uid="uid://bp4qlqg5sso57" path="res://assets/sprites/Exclamation_mark.png" id="4_c4w8v"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_8tegq"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7p1mj"]
+size = Vector2(148, 585)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_md484"]
 animations = [{
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_c4w8v")
+}],
 "loop": true,
 "name": &"attack",
 "speed": 5.0
@@ -26,23 +33,13 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7p1mj"]
-size = Vector2(120, 266)
-
 [node name="Enemy" type="Area2D"]
 collision_layer = 2
 script = ExtResource("1_md0e3")
 _bullet = ExtResource("2_4ra3w")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-10, -101)
-scale = Vector2(0.107843, 0.107199)
-sprite_frames = SubResource("SpriteFrames_8tegq")
-animation = &"idle"
-autoplay = "idle"
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, -123)
+position = Vector2(-13, -290.5)
 shape = SubResource("RectangleShape2D_7p1mj")
 
 [node name="WarningTimer" type="Timer" parent="."]
@@ -53,9 +50,16 @@ one_shot = true
 
 [node name="Warning" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(-2, -306)
+position = Vector2(-61, -446)
 scale = Vector2(0.109722, 0.137346)
 texture = ExtResource("4_c4w8v")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(-62, -225)
+scale = Vector2(0.175, 0.175)
+sprite_frames = SubResource("SpriteFrames_md484")
+animation = &"attack"
+autoplay = "idle"
 
 [connection signal="timeout" from="WarningTimer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

@@ -6,14 +6,27 @@ class_name GameManager
 @onready var transition: Sprite2D = $Transition
 @onready var round_timer: Timer = $RoundTimer
 @onready var label: Label = $Label
+@onready var label_3: Label = $Label3
+var rng = RandomNumberGenerator.new()
 
 func _ready() -> void:
+	Globals.reset_player_lives()
+	Globals.score = 0
 	transition.self_modulate.a = 0
 	update_score()
+	update_lives()
 	start_round()
 	
+func prepare_run() -> void:
+	# Setup multiple encounters in a run
+	for n in rng.randi_range(3, 6):
+		pass
+	
 func update_score() -> void:
-	label.text = "Score: " + str(Globals.score)
+	label.text = str(Globals.score)
+	
+func update_lives() -> void:
+	label_3.text = str(Globals.player_lives)
 	
 func start_round() -> void:
 	enemy.begin_attack()
@@ -27,6 +40,7 @@ func player_hit() -> void:
 	player.health -= 1
 	if player.health <= 0:
 		player.die()
+		update_lives()
 	
 	Globals.score -= 1
 	
@@ -50,22 +64,28 @@ func bullet_hit() -> void:
 	end_round()
 	
 func end_round() -> void:
-	player.round_reset()
-	enemy.round_reset()
 	create_tween().tween_property(transition, "self_modulate:a", 1, 0.5)
 	update_score()
 	round_timer.start()
 			
-func end_fight() -> void:
-	get_tree().call_deferred("reload_current_scene")
+func end_encounter() -> void:
+	# TODO Don't immediatly reset scene
+	get_tree().call_deferred("change_scene_to_file", "res://scenes/main_menu.tscn")
 
 func _on_round_timer_timeout() -> void:
-	# Player or Enemy is dead, fight is over
-	if player.health <= 0 or enemy.health <= 0:
-		end_fight()
+	# Enemy is dead the fight is over
+	if enemy.health <= 0:
+		end_encounter()
+	elif player.health <= 0:
+		if Globals.player_lives <= 0:
+			get_tree().call_deferred("change_scene_to_file", "res://scenes/game_over.tscn")
+		else:
+			start_round()
 	# Someone is still alive
 	else:
 		# Prepare new round
 		start_round()
-		
+	
+	player.round_reset()
+	enemy.round_reset()
 	transition.self_modulate.a = 0
