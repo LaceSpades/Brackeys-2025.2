@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://by0wvs4osdwgn"]
+[gd_scene load_steps=8 format=3 uid="uid://by0wvs4osdwgn"]
 
 [ext_resource type="Script" uid="uid://rpvvhhfoymcd" path="res://scripts/main_menu.gd" id="1_8ln24"]
 [ext_resource type="Texture2D" uid="uid://beh01dsjhe47h" path="res://assets/sprites/Background.png" id="2_8ln24"]
 [ext_resource type="AudioStream" uid="uid://bfrfhayyfg1rw" path="res://assets/music/menu.wav" id="2_ekxnf"]
-[ext_resource type="PackedScene" uid="uid://bjljaa7uh0lj7" path="res://scenes/button.tscn" id="5_rtw2f"]
+[ext_resource type="Texture2D" uid="uid://c1wiw8p0v0m3g" path="res://assets/sprites/button_texture3.png" id="6_oa1go"]
 [ext_resource type="Texture2D" uid="uid://ikstj3e3n3li" path="res://assets/sprites/Logo.png" id="6_rtw2f"]
+[ext_resource type="PackedScene" uid="uid://de0kxw2kl0fx" path="res://scenes/texture_button.tscn" id="7_jk1qb"]
+[ext_resource type="PackedScene" uid="uid://cixqhdk68uam" path="res://scenes/button_label.tscn" id="7_oa1go"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -30,17 +32,26 @@ texture = ExtResource("2_8ln24")
 stream = ExtResource("2_ekxnf")
 autoplay = true
 
-[node name="StartButton" parent="." instance=ExtResource("5_rtw2f")]
-layout_mode = 0
-offset_left = 904.0
-offset_top = 555.0
-offset_right = 1079.0
-offset_bottom = 636.0
-text = "Start Game"
-
 [node name="Logo" type="Sprite2D" parent="."]
 position = Vector2(964, 259)
 scale = Vector2(0.298264, 0.298264)
 texture = ExtResource("6_rtw2f")
+
+[node name="StartButton" parent="." instance=ExtResource("7_jk1qb")]
+layout_mode = 0
+offset_left = 843.0
+offset_top = 518.0
+offset_right = 1803.0
+offset_bottom = 1038.0
+scale = Vector2(0.32, 0.32)
+texture_normal = ExtResource("6_oa1go")
+
+[node name="ButtonLabel" parent="StartButton" instance=ExtResource("7_oa1go")]
+layout_mode = 0
+offset_left = 187.5
+offset_top = 187.5
+offset_right = 763.5
+offset_bottom = 304.5
+text = "Start Game"
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]

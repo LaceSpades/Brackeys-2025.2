@@ -2,10 +2,10 @@ extends Control
 
 @onready var display_timer: Timer = $DisplayTimer
 @onready var mode: Label = $Mode
-@onready var play_it_safe: Button = $PlayItSafe
-@onready var keep_going: Button = $KeepGoing
-@onready var risk_it: Button = $RiskIt
-@onready var retire: Button = $Retire
+@onready var play_it_safe: TextureButton = $PlayItSafeButton
+@onready var keep_going: TextureButton = $KeepGoingButton
+@onready var risk_it: TextureButton = $RiskItButton
+@onready var retire: TextureButton = $RetireButton
 
 func _on_retire_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")

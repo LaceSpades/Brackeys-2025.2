@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://de0kxw2kl0fx"]
+
+[ext_resource type="Texture2D" uid="uid://rsvn6qbcp5uk" path="res://assets/sprites/button_texture2.png" id="1_7k1tt"]
+[ext_resource type="Script" uid="uid://385sw018uj0y" path="res://scripts/texture_button.gd" id="1_pom25"]
+[ext_resource type="AudioStream" uid="uid://b3rh8l33piotd" path="res://assets/sounds/menu switch option.wav" id="2_7k1tt"]
+[ext_resource type="AudioStream" uid="uid://b182t4sak7pu8" path="res://assets/sounds/menu select.wav" id="3_qkt4e"]
+
+[node name="TextureButton" type="TextureButton"]
+scale = Vector2(0.32, 0.32)
+texture_normal = ExtResource("1_7k1tt")
+script = ExtResource("1_pom25")
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_7k1tt")
+
+[node name="PressSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_qkt4e")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]
