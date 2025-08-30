@@ -24,6 +24,7 @@ func _on_play_it_safe_pressed() -> void:
 	
 func _on_keep_going_pressed() -> void:
 	Globals.risk_it(0)
+	change_to_game()
 
 func _on_risk_it_pressed() -> void:
 	Globals.risk_it(1)
@@ -32,6 +33,9 @@ func _on_risk_it_pressed() -> void:
 	
 func display_mode() -> void:
 	mode.text = Globals.get_mode_name(Globals.current_mode)
+	
+func change_to_game() -> void:
+	get_tree().change_scene_to_file("res://scenes/game.tscn")
 	
 func _on_display_timer_timeout() -> void:
 	get_tree().change_scene_to_file("res://scenes/game.tscn")
