@@ -16,7 +16,14 @@ var rng = RandomNumberGenerator.new()
 var enemies: Array
 var current_enemy: Enemy
 
+var enemy_position_x = 759.0
+var enemy_position_y = 528.0
+
+var encounter_modifier = 0
+var flipped = 1
+
 func _ready() -> void:
+	print(Globals.current_mode)
 	if Globals.current_mode == "new_game":
 		Globals.reset()
 	elif Globals.current_mode == "health_boost":
@@ -34,6 +41,13 @@ func _ready() -> void:
 			Globals.current_player_lives = 1
 	elif Globals.current_mode == "upside_down":
 		camera.zoom.y = -camera.zoom.y
+	elif Globals.current_mode == "flip_sides":
+		flipped = -1
+		player.position.x = 740
+		player.scale.x *= flipped
+		enemy_position_x = -750
+	elif Globals.current_mode == "more_encounters":
+		encounter_modifier = 3
 		
 	transition.self_modulate.a = 0
 	update_score()
@@ -41,12 +55,9 @@ func _ready() -> void:
 	prepare_run()
 	start_encounter()
 	
-func _process(float) -> void:
-	print(player.current_health)
-	
 func prepare_run() -> void:
 	# Setup multiple encounters in a run
-	for n in rng.randi_range(3, 6):
+	for n in rng.randi_range(3 + encounter_modifier, 6 + encounter_modifier):
 		var enemy_choice = rng.randi_range(0, 3)
 		match enemy_choice:
 			0:
@@ -66,8 +77,9 @@ func update_lives() -> void:
 	
 func start_encounter() -> void:
 	current_enemy = enemies.pop_front()
-	current_enemy.global_position.x = 759.0
-	current_enemy.global_position.y = 528.0
+	current_enemy.position.x = enemy_position_x
+	current_enemy.position.y = enemy_position_y
+	current_enemy.scale.x *= flipped
 	add_child(current_enemy)
 	
 	start_round()

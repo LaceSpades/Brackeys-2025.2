@@ -37,8 +37,8 @@ func _process(delta: float) -> void:
 			bullet.set_collision_layer_value(1, true)
 			bullet.set_collision_mask_value(2, true)
 			bullet.game_manager = game_manager
-			bullet.global_position.x = -406.0
-			bullet.global_position.y = 126.0
+			bullet.position.x = 300
+			bullet.position.y = -405
 			
 			muzzle_flash.visible = true
 			flash_timer.start()

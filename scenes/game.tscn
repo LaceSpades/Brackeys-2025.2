@@ -29,7 +29,7 @@ yellow_enemy = ExtResource("5_kvuet")
 one_shot = true
 
 [node name="Player" parent="." node_paths=PackedStringArray("game_manager") instance=ExtResource("1_uwrxv")]
-position = Vector2(-710, 533)
+position = Vector2(-730, 531)
 game_manager = NodePath("..")
 
 [node name="Transition" type="Sprite2D" parent="."]

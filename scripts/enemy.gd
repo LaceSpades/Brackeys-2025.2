@@ -54,8 +54,8 @@ func _on_attack_timer_timeout() -> void:
 	bullet.direction = -1
 	bullet.set_collision_layer_value(2, true)
 	bullet.set_collision_mask_value(1, true)
-	bullet.global_position.x = 282.0
-	bullet.global_position.y = 100
+	bullet.position.x = -421
+	bullet.position.y = -427
 	muzzle_flash.visible = true
 	warning.visible = false
 	warned_player = false
