@@ -21,7 +21,7 @@ func reset_player_lives() -> void:
 	current_player_lives = DEFAULT_PLAYER_LIVES
 	
 func reset_game() -> void:
-	current_mode = "lose_lives"
+	current_mode = "upside_down"
 	
 func risk_it(mode: int) -> void:
 	if mode == -1:

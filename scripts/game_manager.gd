@@ -6,6 +6,7 @@ class_name GameManager
 @export var blue_enemy: PackedScene
 @export var yellow_enemy: PackedScene
 
+@onready var camera: Camera2D = $Camera2D
 @onready var player: Player = $Player
 @onready var transition: Sprite2D = $Transition
 @onready var round_timer: Timer = $RoundTimer
@@ -31,6 +32,9 @@ func _ready() -> void:
 		Globals.current_player_lives -= 2
 		if Globals.current_player_lives < 1:
 			Globals.current_player_lives = 1
+	elif Globals.current_mode == "upside_down":
+		camera.zoom.y = -camera.zoom.y
+		
 	transition.self_modulate.a = 0
 	update_score()
 	update_lives()
