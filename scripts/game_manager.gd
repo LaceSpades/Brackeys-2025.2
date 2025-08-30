@@ -27,6 +27,11 @@ var normal_player_pos_y = 531
 var encounter_modifier = 0
 var flipped = 1
 
+const BLOCK_VALUE = 3
+const DAMAGE_VALUE = -1
+const HIT_VALUE = 2
+const JUMP_WARNING = -3
+
 func _ready() -> void:
 	if Globals.current_mode == "new_game":
 		Globals.reset()
@@ -132,16 +137,16 @@ func player_hit() -> void:
 		player.die()
 		update_lives()
 	
-	Globals.score -= 1
+	Globals.score += DAMAGE_VALUE
 	
 	end_round()
 
 func enemy_hit() -> void:
 	# Punish player for attacking before being warned
 	if current_enemy.warned_player:
-		Globals.score += 1
+		Globals.score += HIT_VALUE
 	else:
-		Globals.score -= 1
+		Globals.score += JUMP_WARNING
 	current_enemy.stop_timers()
 	
 	current_enemy.take_damage(1)
@@ -150,6 +155,7 @@ func enemy_hit() -> void:
 	end_round()
 	
 func bullet_hit() -> void:
+	Globals.score += BLOCK_VALUE
 	end_round()
 	
 func end_round() -> void:
@@ -158,6 +164,8 @@ func end_round() -> void:
 	round_timer.start()
 			
 func end_encounter() -> void:
+	if Globals.current_player_lives <= 0:
+		get_tree().call_deferred("change_scene_to_file", "res://scenes/game_over.tscn")
 	if enemies.size() > 0:
 		current_enemy.queue_free()
 		start_encounter()
