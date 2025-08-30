@@ -1,13 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://c0lhvf74c84j4"]
+[gd_scene load_steps=10 format=3 uid="uid://c0lhvf74c84j4"]
 
 [ext_resource type="Script" uid="uid://citemhw73hc3o" path="res://scripts/game_over.gd" id="1_7m3ot"]
-[ext_resource type="Texture2D" uid="uid://beh01dsjhe47h" path="res://assets/sprites/Background.png" id="2_v3hpu"]
-[ext_resource type="LabelSettings" uid="uid://base8q4ybr2yi" path="res://assets/fonts/new_label_settings.tres" id="3_racf3"]
+[ext_resource type="Texture2D" uid="uid://bh27ca8hrnbex" path="res://assets/sprites/GameOver.png" id="2_8bugq"]
 [ext_resource type="AudioStream" uid="uid://bfrfhayyfg1rw" path="res://assets/music/menu.wav" id="3_tbwuq"]
 [ext_resource type="PackedScene" uid="uid://dwmw14tfmcpe4" path="res://scenes/menu_score.tscn" id="5_7m3ot"]
 [ext_resource type="PackedScene" uid="uid://de0kxw2kl0fx" path="res://scenes/texture_button.tscn" id="7_2jtsn"]
+[ext_resource type="Texture2D" uid="uid://bqwooc1h6dln4" path="res://assets/sprites/button_texture4.png" id="7_wawo4"]
 [ext_resource type="PackedScene" uid="uid://cixqhdk68uam" path="res://scenes/button_label.tscn" id="8_8bugq"]
 [ext_resource type="Texture2D" uid="uid://c1wiw8p0v0m3g" path="res://assets/sprites/button_texture3.png" id="8_wawo4"]
+[ext_resource type="FontFile" uid="uid://d037h3p8j5dke" path="res://assets/fonts/BAHNSCHRIFT.TTF" id="9_56v3a"]
 
 [node name="GameOver" type="Control"]
 layout_mode = 3
@@ -23,38 +24,23 @@ layout_mode = 0
 offset_top = -5.0
 offset_right = 1941.0
 offset_bottom = 1099.0
+color = Color(0, 0, 0, 1)
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(960.667, 541)
+position = Vector2(960.667, 567)
 scale = Vector2(0.501389, 0.501389)
-texture = ExtResource("2_v3hpu")
-
-[node name="Title" type="Label" parent="."]
-layout_mode = 0
-offset_left = 694.0
-offset_top = 21.0
-offset_right = 1268.0
-offset_bottom = 223.0
-text = "GAME OVER"
-label_settings = ExtResource("3_racf3")
+texture = ExtResource("2_8bugq")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_tbwuq")
 autoplay = true
 
-[node name="MenuScore" parent="." instance=ExtResource("5_7m3ot")]
-layout_mode = 0
-offset_left = 743.0
-offset_top = 140.0
-offset_right = 1230.0
-offset_bottom = 236.0
-
 [node name="RestartButton" parent="." instance=ExtResource("7_2jtsn")]
 layout_mode = 0
-offset_left = 827.0
-offset_top = 362.0
-offset_right = 1787.0
-offset_bottom = 882.0
+offset_left = 634.0
+offset_top = 869.0
+offset_right = 1594.0
+offset_bottom = 1389.0
 texture_normal = ExtResource("8_wawo4")
 
 [node name="ButtonLabel" parent="RestartButton" instance=ExtResource("8_8bugq")]
@@ -67,10 +53,10 @@ text = "Restart"
 
 [node name="ReturnToMenuButton" parent="." instance=ExtResource("7_2jtsn")]
 layout_mode = 0
-offset_left = 826.0
-offset_top = 555.0
-offset_right = 1786.0
-offset_bottom = 1075.0
+offset_left = 959.0
+offset_top = 870.0
+offset_right = 1919.0
+offset_bottom = 1390.0
 
 [node name="ButtonLabel" parent="ReturnToMenuButton" instance=ExtResource("8_8bugq")]
 layout_mode = 0
@@ -80,6 +66,20 @@ offset_right = 862.0
 offset_bottom = 374.5
 text = "Return To
 Menu"
+
+[node name="ButtonTexture4" type="Sprite2D" parent="."]
+position = Vector2(965, 92.125)
+scale = Vector2(0.9, 0.276442)
+texture = ExtResource("7_wawo4")
+
+[node name="MenuScore" parent="." instance=ExtResource("5_7m3ot")]
+layout_mode = 0
+offset_left = 675.0
+offset_top = 36.0
+offset_right = 1240.0
+offset_bottom = 147.0
+theme_override_fonts/font = ExtResource("9_56v3a")
+vertical_alignment = 1
 
 [connection signal="pressed" from="RestartButton" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="ReturnToMenuButton" to="." method="_on_return_to_menu_pressed"]
