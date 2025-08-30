@@ -31,7 +31,7 @@ func _on_risk_it_pressed() -> void:
 	disable_buttons()
 	
 func display_mode() -> void:
-	mode.text = Globals.current_mode
+	mode.text = Globals.get_mode_name(Globals.current_mode)
 	
 func _on_display_timer_timeout() -> void:
 	get_tree().change_scene_to_file("res://scenes/game.tscn")

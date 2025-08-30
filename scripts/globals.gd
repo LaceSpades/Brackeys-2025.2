@@ -11,6 +11,33 @@ var current_mode = "new_game"
 var enemy_health = 1;
 var life_damage = 1
 
+# No time for enums
+func get_mode_name(mode: String):
+	match mode:
+		"health_boost":
+			return "Health Boost"
+		"life_boost":
+			return "Life Boost"
+		"enemy_health_boost":
+			return "Enemy Health Boost"
+		"double_lives_lost":
+			return "Double Lives Lost"
+		"lose_lives":
+			return "Lose Lives"
+		"whos_who_enemy":
+			return "Who's Who? (Enemy)"
+		"whos_who_player":
+			return "Who's Who? (Player)"
+		"upside_down":
+			return "Upside Down"
+		"flip_sides":
+			return "Flip Sides"
+		"more_encounters":
+			return "More Encounters"
+		"reduce_score":
+			return "Reduce Score"
+	return ""
+
 func reset() -> void:
 	reset_player_lives()
 	score = 0
