@@ -1,0 +1,92 @@
+[gd_scene load_steps=9 format=3 uid="uid://cuqdxsty4g2ww"]
+
+[ext_resource type="Script" uid="uid://rpvvhhfoymcd" path="res://scripts/main_menu.gd" id="1_dc7ax"]
+[ext_resource type="Texture2D" uid="uid://beh01dsjhe47h" path="res://assets/sprites/Background.png" id="2_14uot"]
+[ext_resource type="AudioStream" uid="uid://bfrfhayyfg1rw" path="res://assets/music/menu.wav" id="3_a7v8x"]
+[ext_resource type="PackedScene" uid="uid://de0kxw2kl0fx" path="res://scenes/texture_button.tscn" id="5_0qdbj"]
+[ext_resource type="Script" uid="uid://xwxoq1y8qpkr" path="res://scripts/intro_menu.gd" id="6_a7v8x"]
+[ext_resource type="Texture2D" uid="uid://b3i7jnso2tfkq" path="res://assets/sprites/button_texture.png" id="7_14uot"]
+[ext_resource type="PackedScene" uid="uid://cixqhdk68uam" path="res://scenes/button_label.tscn" id="7_j5a1a"]
+[ext_resource type="FontFile" uid="uid://d037h3p8j5dke" path="res://assets/fonts/BAHNSCHRIFT.TTF" id="8_a7v8x"]
+
+[node name="IntroMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dc7ax")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_top = -5.0
+offset_right = 1924.0
+offset_bottom = 1078.0
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(960.667, 541)
+scale = Vector2(0.501389, 0.501389)
+texture = ExtResource("2_14uot")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_a7v8x")
+autoplay = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(968, 433.5)
+scale = Vector2(2.39792, 1.72115)
+texture = ExtResource("7_14uot")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 113.0
+offset_right = 1848.0
+offset_bottom = 758.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_a7v8x")
+theme_override_font_sizes/font_size = 20
+text = "Welcome to “Risky Duel: Fire away~”, the reflex-based duel game where timing is everything! As the plucky assassin, “Vendetta Heartshot”, prove yourself and win a gauntlet of duels against a squad of heartless robots: the Cannon Heads!
+
+HOW TO PLAY
+
+Press the space bar as soon as you see the exclaimation mark (!) over a Cannon Head robot.
+Time it right for a perfect shot, win the duel, and fight the tin can grunt!
+
+PLAY IT SAFE, or RISK IT?
+
+After a set of duels, you can choose to play the duel normally or Risk It! Accept challenge modifiers for a higher score!
+
+----------------------------
+
+The year is 2005. The place is Reaper City.
+
+A lawless future where the money talks, corporations listen, and the conversation is all about sponsored duels to the death. Risky Duel, the one-on-one deathmatch sporting event, broadcasts to all who crave excitement in their soulless day-to-day lives.
+
+One woman, Vendetta Heartshot, is a rising champion of the Risky Duel. With the help of her robotic rifle Rafael, she makes a living off of winning the prize money as a deadly sniper.
+
+Z Corp, the national conglomerate that controls Reaper City, took notice of Vendetta and want the money for themselves. They send robotic killers to participate in Risky Duel for them: the Cannon Heads.
+
+Now Vendetta must protect herself, her title, and her livelihood. She must accept the challenge.
+
+Every shot counts."
+autowrap_mode = 2
+
+[node name="ContinueButton" parent="." instance=ExtResource("5_0qdbj")]
+layout_mode = 0
+offset_left = 844.0
+offset_top = 841.0
+offset_right = 1804.0
+offset_bottom = 1361.0
+script = ExtResource("6_a7v8x")
+
+[node name="ButtonLabel" parent="ContinueButton" instance=ExtResource("7_j5a1a")]
+layout_mode = 0
+offset_left = 340.625
+offset_top = 196.875
+offset_right = 606.625
+offset_bottom = 313.875
+text = "Got It"
+
+[connection signal="pressed" from="ContinueButton" to="." method="_on_continue_button_pressed"]

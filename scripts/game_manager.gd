@@ -141,11 +141,16 @@ func start_round() -> void:
 	player.round_reset()
 	current_enemy.begin_attack()
 	
+func can_player_attack() -> bool:
+	return current_enemy.warned_player
+	
 func player_attacks() -> void:
 	# Check if enemy has warned
 	if not current_enemy.warned_player:
 		current_enemy.stop_timers()
-		
+		current_enemy.fire()
+		current_enemy.flash_shield()
+
 func player_hit() -> void:
 	player.take_damage(1)
 	if player.current_health <= 0:
@@ -160,13 +165,12 @@ func enemy_hit() -> void:
 	# Punish player for attacking before being warned
 	if current_enemy.warned_player:
 		Globals.score += (HIT_VALUE + score_modifier)
+		current_enemy.take_damage(1)
+		if current_enemy.current_health <= 0:
+			current_enemy.die()
 	else:
-		Globals.score -= (JUMP_WARNING + score_modifier)
+		player_hit()
 	current_enemy.stop_timers()
-	
-	current_enemy.take_damage(1)
-	if current_enemy.current_health <= 0:
-		current_enemy.die()
 	end_round()
 	
 func bullet_hit() -> void:

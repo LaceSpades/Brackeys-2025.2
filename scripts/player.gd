@@ -34,7 +34,7 @@ func _process(delta: float) -> void:
 			var bullet : Bullet = _bullet.instantiate()
 			add_child(bullet)
 			bullet.direction = 1
-			bullet.set_collision_layer_value(1, true)
+			bullet.set_collision_layer_value(1, game_manager.can_player_attack())
 			bullet.set_collision_mask_value(2, true)
 			bullet.game_manager = game_manager
 			bullet.position.x = 300
@@ -70,7 +70,7 @@ func take_damage(amount: int) -> void:
 	await get_tree().create_timer(0.1).timeout
 	await get_tree().create_timer(0.2).timeout
 	sprite.self_modulate.a = 1
-	
+
 func remove_hit_marker() -> void:
 	hit_marker.visible = false
 

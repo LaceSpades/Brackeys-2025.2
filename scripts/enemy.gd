@@ -11,6 +11,7 @@ class_name Enemy
 @onready var hit_marker: Sprite2D = $HitMarker
 @onready var shoot_sound: AudioStreamPlayer = $ShootSound
 @onready var damage_sound: AudioStreamPlayer = $DamageSound
+@onready var shield: Sprite2D = $Shield
 
 var rng: RandomNumberGenerator;
 var starting_health = 1;
@@ -45,6 +46,9 @@ func _on_timer_timeout() -> void:
 	warning.visible = true
 
 func _on_attack_timer_timeout() -> void:
+	fire()
+
+func fire() -> void:
 	# Spawn bullet to attack player
 	var bullet : Bullet = _bullet.instantiate()
 	shoot_sound.play()
@@ -72,6 +76,7 @@ func die() -> void:
 	await get_tree().create_timer(0.25).timeout
 	sprite.self_modulate.a = 0
 	
+	
 func take_damage(amount: int) -> void:
 	warning.visible = false
 	warned_player = false
@@ -83,6 +88,23 @@ func take_damage(amount: int) -> void:
 	sprite.self_modulate.a = 0
 	await get_tree().create_timer(0.2).timeout
 	sprite.self_modulate.a = 1
+	shield.visible = false
+	
+func flash_shield() -> void:
+	shield.visible = true
+	shield.self_modulate.a = 0.8
+	await get_tree().create_timer(0.1).timeout
+	shield.self_modulate.a = 1.0
+	await get_tree().create_timer(0.5).timeout
+	shield.self_modulate.a = 0.8
+	await get_tree().create_timer(0.1).timeout
+	shield.self_modulate.a = 0.6
+	await get_tree().create_timer(0.1).timeout
+	shield.self_modulate.a = 0.4
+	await get_tree().create_timer(0.1).timeout
+	shield.self_modulate.a = 0.2
+	await get_tree().create_timer(0.1).timeout
+	shield.visible = false
 	
 func remove_hit_marker() -> void:
 	hit_marker.visible = false

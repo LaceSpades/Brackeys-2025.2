@@ -1,5 +1,6 @@
 extends Node
 
+var introduced = false;
 var score = 0;
 const DEFAULT_PLAYER_LIVES = 5;
 var current_player_lives = DEFAULT_PLAYER_LIVES
