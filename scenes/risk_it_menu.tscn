@@ -1,10 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://c207a2o1hfwdl"]
+[gd_scene load_steps=7 format=3 uid="uid://c207a2o1hfwdl"]
 
 [ext_resource type="AudioStream" uid="uid://bfrfhayyfg1rw" path="res://assets/music/menu.wav" id="1_42gfa"]
 [ext_resource type="Script" uid="uid://3jk03r0ykavj" path="res://scripts/risk_it_menu.gd" id="1_th3bf"]
 [ext_resource type="LabelSettings" uid="uid://base8q4ybr2yi" path="res://assets/fonts/new_label_settings.tres" id="2_73ms6"]
 [ext_resource type="PackedScene" uid="uid://dwmw14tfmcpe4" path="res://scenes/menu_score.tscn" id="3_5adcy"]
 [ext_resource type="PackedScene" uid="uid://bjljaa7uh0lj7" path="res://scenes/button.tscn" id="5_ir72k"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ir72k"]
+font_size = 70
+font_color = Color(0, 0, 0, 1)
 
 [node name="RiskItMenu" type="Control"]
 layout_mode = 3
@@ -15,12 +19,23 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_th3bf")
 
+[node name="DisplayTimer" type="Timer" parent="."]
+
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
 offset_left = -11.0
-offset_top = 13.0
+offset_top = -7.0
 offset_right = 1930.0
 offset_bottom = 1117.0
+
+[node name="Mode" type="Label" parent="."]
+layout_mode = 0
+offset_left = 719.0
+offset_top = 226.0
+offset_right = 1194.0
+offset_bottom = 337.0
+label_settings = SubResource("LabelSettings_ir72k")
+horizontal_alignment = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_42gfa")
@@ -74,6 +89,7 @@ offset_right = 1017.0
 offset_bottom = 716.0
 text = "Retire"
 
+[connection signal="timeout" from="DisplayTimer" to="." method="_on_display_timer_timeout"]
 [connection signal="pressed" from="PlayItSafe" to="." method="_on_play_it_safe_pressed"]
 [connection signal="pressed" from="KeepGoing" to="." method="_on_keep_going_pressed"]
 [connection signal="pressed" from="RiskIt" to="." method="_on_risk_it_pressed"]
