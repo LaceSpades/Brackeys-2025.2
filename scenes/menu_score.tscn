@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwmw14tfmcpe4"]
+
+[ext_resource type="Script" uid="uid://cykvectc3uchp" path="res://scripts/menu_score.gd" id="1_if1d4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2u0ys"]
+font_size = 70
+font_color = Color(0, 0, 0, 1)
+
+[node name="MenuScore" type="Label"]
+offset_right = 487.0
+offset_bottom = 96.0
+text = "Score: "
+label_settings = SubResource("LabelSettings_2u0ys")
+horizontal_alignment = 1
+script = ExtResource("1_if1d4")
