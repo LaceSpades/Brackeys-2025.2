@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://by0wvs4osdwgn"]
+[gd_scene load_steps=6 format=3 uid="uid://by0wvs4osdwgn"]
 
 [ext_resource type="Script" uid="uid://rpvvhhfoymcd" path="res://scripts/main_menu.gd" id="1_8ln24"]
+[ext_resource type="Texture2D" uid="uid://beh01dsjhe47h" path="res://assets/sprites/Background.png" id="2_8ln24"]
 [ext_resource type="AudioStream" uid="uid://bfrfhayyfg1rw" path="res://assets/music/menu.wav" id="2_ekxnf"]
 [ext_resource type="LabelSettings" uid="uid://base8q4ybr2yi" path="res://assets/fonts/new_label_settings.tres" id="3_bqqt6"]
 [ext_resource type="PackedScene" uid="uid://bjljaa7uh0lj7" path="res://scenes/button.tscn" id="5_rtw2f"]
@@ -19,6 +20,11 @@ layout_mode = 0
 offset_top = -5.0
 offset_right = 1924.0
 offset_bottom = 1078.0
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(960.667, 541)
+scale = Vector2(0.501389, 0.501389)
+texture = ExtResource("2_8ln24")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_ekxnf")

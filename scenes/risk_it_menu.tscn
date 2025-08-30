@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://c207a2o1hfwdl"]
+[gd_scene load_steps=8 format=3 uid="uid://c207a2o1hfwdl"]
 
 [ext_resource type="AudioStream" uid="uid://bfrfhayyfg1rw" path="res://assets/music/menu.wav" id="1_42gfa"]
 [ext_resource type="Script" uid="uid://3jk03r0ykavj" path="res://scripts/risk_it_menu.gd" id="1_th3bf"]
 [ext_resource type="LabelSettings" uid="uid://base8q4ybr2yi" path="res://assets/fonts/new_label_settings.tres" id="2_73ms6"]
 [ext_resource type="PackedScene" uid="uid://dwmw14tfmcpe4" path="res://scenes/menu_score.tscn" id="3_5adcy"]
 [ext_resource type="PackedScene" uid="uid://bjljaa7uh0lj7" path="res://scenes/button.tscn" id="5_ir72k"]
+[ext_resource type="Texture2D" uid="uid://beh01dsjhe47h" path="res://assets/sprites/Background.png" id="6_xo7y8"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ir72k"]
 font_size = 70
@@ -27,6 +28,11 @@ offset_left = -11.0
 offset_top = -7.0
 offset_right = 1930.0
 offset_bottom = 1117.0
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(960.667, 541)
+scale = Vector2(0.501389, 0.501389)
+texture = ExtResource("6_xo7y8")
 
 [node name="Mode" type="Label" parent="."]
 layout_mode = 0

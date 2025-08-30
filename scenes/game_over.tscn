@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://c0lhvf74c84j4"]
+[gd_scene load_steps=7 format=3 uid="uid://c0lhvf74c84j4"]
 
 [ext_resource type="Script" uid="uid://citemhw73hc3o" path="res://scripts/game_over.gd" id="1_7m3ot"]
+[ext_resource type="Texture2D" uid="uid://beh01dsjhe47h" path="res://assets/sprites/Background.png" id="2_v3hpu"]
 [ext_resource type="LabelSettings" uid="uid://base8q4ybr2yi" path="res://assets/fonts/new_label_settings.tres" id="3_racf3"]
 [ext_resource type="AudioStream" uid="uid://bfrfhayyfg1rw" path="res://assets/music/menu.wav" id="3_tbwuq"]
 [ext_resource type="PackedScene" uid="uid://dwmw14tfmcpe4" path="res://scenes/menu_score.tscn" id="5_7m3ot"]
@@ -20,6 +21,11 @@ layout_mode = 0
 offset_top = -5.0
 offset_right = 1941.0
 offset_bottom = 1099.0
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(960.667, 541)
+scale = Vector2(0.501389, 0.501389)
+texture = ExtResource("2_v3hpu")
 
 [node name="Title" type="Label" parent="."]
 layout_mode = 0

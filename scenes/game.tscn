@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://vq7dgv26b7yt"]
+[gd_scene load_steps=16 format=3 uid="uid://vq7dgv26b7yt"]
 
 [ext_resource type="Script" uid="uid://egj1tfdw38n3" path="res://scripts/game_manager.gd" id="1_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://dvke3s2413ele" path="res://scenes/player.tscn" id="1_uwrxv"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://cg3o8hpbrgk6c" path="res://scenes/blue_enemy.tscn" id="6_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://dh0om8f6wauhi" path="res://scenes/enemy_sus.tscn" id="7_kvuet"]
 [ext_resource type="Texture2D" uid="uid://dnlidkyb17n16" path="res://assets/sprites/score_overlay_blank.png" id="7_u5sy4"]
+[ext_resource type="Texture2D" uid="uid://beh01dsjhe47h" path="res://assets/sprites/Background.png" id="8_trtic"]
 [ext_resource type="PackedScene" uid="uid://b0bdowacrel02" path="res://scenes/player_sus.tscn" id="12_dinhu"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_gee14"]
@@ -26,6 +27,11 @@ blue_enemy = ExtResource("6_u5sy4")
 yellow_enemy = ExtResource("5_kvuet")
 player_sus = ExtResource("12_dinhu")
 enemy_sus = ExtResource("7_kvuet")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(2.38419e-07, -2.38419e-07)
+scale = Vector2(0.501389, 0.501389)
+texture = ExtResource("8_trtic")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
