@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://b0bdowacrel02"]
+
+[ext_resource type="PackedScene" uid="uid://dvke3s2413ele" path="res://scenes/player.tscn" id="1_cxltc"]
+[ext_resource type="Texture2D" uid="uid://dpgl3hagyqjgb" path="res://assets/sprites/Cannon_Head_02_Shot_Fired.png" id="2_pirjt"]
+[ext_resource type="Texture2D" uid="uid://d3mdix15oveap" path="res://assets/sprites/Cannon_Head_01_Idle.png" id="3_bd2yu"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u1t88"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_pirjt")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"die",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_bd2yu")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cxltc"]
+size = Vector2(348, 599.5)
+
+[node name="Player" instance=ExtResource("1_cxltc")]
+
+[node name="Sprite" parent="." index="0"]
+position = Vector2(27, -331)
+scale = Vector2(-0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_u1t88")
+frame_progress = 0.595533
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(-72, -299)
+rotation = -3.14159
+scale = Vector2(1, -1)
+shape = SubResource("RectangleShape2D_cxltc")
+
+[node name="MuzzleFlash" parent="." index="3"]
+position = Vector2(379, -440)

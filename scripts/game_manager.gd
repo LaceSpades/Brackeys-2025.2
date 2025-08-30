@@ -5,6 +5,8 @@ class_name GameManager
 @export var red_enemy: PackedScene
 @export var blue_enemy: PackedScene
 @export var yellow_enemy: PackedScene
+@export var player_sus: PackedScene
+@export var enemy_sus: PackedScene
 
 @onready var camera: Camera2D = $Camera2D
 @onready var player: Player = $Player
@@ -23,7 +25,6 @@ var encounter_modifier = 0
 var flipped = 1
 
 func _ready() -> void:
-	print(Globals.current_mode)
 	if Globals.current_mode == "new_game":
 		Globals.reset()
 	elif Globals.current_mode == "health_boost":
@@ -48,7 +49,15 @@ func _ready() -> void:
 		enemy_position_x = -750
 	elif Globals.current_mode == "more_encounters":
 		encounter_modifier = 3
-		
+	elif Globals.current_mode == "whos_who_enemy":
+		var temp_player = player_sus.instantiate()
+		add_child(temp_player)
+		temp_player.position.x = player.position.x
+		temp_player.position.y = player.position.y
+		player.queue_free()
+		player = temp_player
+		temp_player.game_manager = self
+
 	transition.self_modulate.a = 0
 	update_score()
 	update_lives()
@@ -58,16 +67,19 @@ func _ready() -> void:
 func prepare_run() -> void:
 	# Setup multiple encounters in a run
 	for n in rng.randi_range(3 + encounter_modifier, 6 + encounter_modifier):
-		var enemy_choice = rng.randi_range(0, 3)
-		match enemy_choice:
-			0:
-				enemies.append(grey_enemy.instantiate())
-			1:
-				enemies.append(red_enemy.instantiate())
-			2:
-				enemies.append(yellow_enemy.instantiate())
-			3:
-				enemies.append(blue_enemy.instantiate())
+		if Globals.current_mode != "whos_who_player":
+			var enemy_choice = rng.randi_range(0, 3)
+			match enemy_choice:
+				0:
+					enemies.append(grey_enemy.instantiate())
+				1:
+					enemies.append(red_enemy.instantiate())
+				2:
+					enemies.append(yellow_enemy.instantiate())
+				3:
+					enemies.append(blue_enemy.instantiate())
+		else:
+			enemies.append(enemy_sus.instantiate())
 	
 func update_score() -> void:
 	label.text = str(Globals.score)
@@ -77,9 +89,12 @@ func update_lives() -> void:
 	
 func start_encounter() -> void:
 	current_enemy = enemies.pop_front()
-	current_enemy.position.x = enemy_position_x
-	current_enemy.position.y = enemy_position_y
-	current_enemy.scale.x *= flipped
+	if Globals.current_mode == "whos_who_player" or Globals.current_mode == "whos_who_enemy":
+		pass
+	else:
+		current_enemy.position.x = enemy_position_x
+		current_enemy.position.y = enemy_position_y
+		current_enemy.scale.x *= flipped
 	add_child(current_enemy)
 	
 	start_round()
