@@ -5,7 +5,7 @@ const DEFAULT_PLAYER_LIVES = 5;
 var current_player_lives = DEFAULT_PLAYER_LIVES
 var safe_modes = ["health_boost", "life_boost"]
 var risk_modes = ["enemy_health_boost", "double_lives_lost", "lose_lives", "whos_who_enemy", "whos_who_player", \
-	"upside_down", "flip_sides", "more_encounters"]
+	"upside_down", "flip_sides", "more_encounters", "reduce_score"]
 var rng = RandomNumberGenerator.new()
 var current_mode = "new_game"
 var enemy_health = 1;
