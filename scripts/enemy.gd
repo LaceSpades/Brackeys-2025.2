@@ -48,7 +48,7 @@ func _on_timer_timeout() -> void:
 func _on_attack_timer_timeout() -> void:
 	fire()
 
-func fire() -> void:
+func fire(collides = true) -> void:
 	# Spawn bullet to attack player
 	var bullet : Bullet = _bullet.instantiate()
 	shoot_sound.play()
@@ -56,7 +56,7 @@ func fire() -> void:
 	sprite.animation = "attack"
 	bullet.game_manager = get_parent()
 	bullet.direction = -1
-	bullet.set_collision_layer_value(2, true)
+	bullet.set_collision_layer_value(2, collides)
 	bullet.set_collision_mask_value(1, true)
 	bullet.position.x = -421
 	bullet.position.y = -427

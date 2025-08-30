@@ -147,7 +147,7 @@ func player_attacks() -> void:
 	# Check if enemy has warned
 	if not current_enemy.warned_player:
 		current_enemy.stop_timers()
-		current_enemy.fire()
+		current_enemy.fire(false)
 		current_enemy.flash_shield()
 
 func player_hit() -> void:
