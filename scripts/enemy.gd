@@ -62,7 +62,6 @@ func fire() -> void:
 	bullet.position.y = -427
 	muzzle_flash.visible = true
 	warning.visible = false
-	warned_player = false
 	flash_timer.start()
 
 func die() -> void:
