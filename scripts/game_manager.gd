@@ -88,6 +88,8 @@ func update_score() -> void:
 	label.text = str(Globals.score)
 	
 func update_lives() -> void:
+	if Globals.current_player_lives < 0:
+		Globals.current_player_lives = 0
 	label_3.text = str(Globals.current_player_lives)
 	
 func start_encounter() -> void:
