@@ -16,7 +16,6 @@ var enemies: Array
 var current_enemy: Enemy
 
 func _ready() -> void:
-	Globals.reset_player_lives()
 	Globals.score = 0
 	transition.self_modulate.a = 0
 	update_score()
@@ -98,7 +97,8 @@ func end_encounter() -> void:
 		current_enemy.queue_free()
 		start_encounter()
 	else:
-		get_tree().call_deferred("change_scene_to_file", "res://scenes/main_menu.tscn")
+		# Return to risk it menu
+		get_tree().call_deferred("change_scene_to_file", "res://scenes/risk_it_menu.tscn")
 
 func _on_round_timer_timeout() -> void:
 	transition.self_modulate.a = 0

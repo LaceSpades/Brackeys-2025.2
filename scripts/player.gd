@@ -41,6 +41,7 @@ func _process(delta: float) -> void:
 			game_manager.player_attacks()
 		
 func die() -> void:
+	Globals.player_lives -= 1
 	sprite.self_modulate.a = 0
 	await get_tree().create_timer(0.2).timeout
 	sprite.self_modulate.a = 1
@@ -50,7 +51,6 @@ func die() -> void:
 	sprite.self_modulate.a = 1
 	await get_tree().create_timer(0.25).timeout
 	sprite.self_modulate.a = 0
-	Globals.player_lives -= 1
 	
 func take_damage(amount: int) -> void:
 	health -= amount

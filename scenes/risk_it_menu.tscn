@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://c207a2o1hfwdl"]
+[gd_scene load_steps=5 format=3 uid="uid://c207a2o1hfwdl"]
 
 [ext_resource type="AudioStream" uid="uid://bfrfhayyfg1rw" path="res://assets/music/menu.wav" id="1_42gfa"]
+[ext_resource type="Script" uid="uid://3jk03r0ykavj" path="res://scripts/risk_it_menu.gd" id="1_th3bf"]
 [ext_resource type="LabelSettings" uid="uid://base8q4ybr2yi" path="res://assets/fonts/new_label_settings.tres" id="2_73ms6"]
 [ext_resource type="PackedScene" uid="uid://dwmw14tfmcpe4" path="res://scenes/menu_score.tscn" id="3_5adcy"]
 
@@ -11,6 +12,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_th3bf")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
@@ -69,3 +71,8 @@ offset_left = 732.0
 offset_top = 128.0
 offset_right = 1219.0
 offset_bottom = 224.0
+
+[connection signal="pressed" from="Retire" to="." method="_on_retire_pressed"]
+[connection signal="pressed" from="KeepGoing" to="." method="_on_keep_going_pressed"]
+[connection signal="pressed" from="RiskItButton" to="." method="_on_risk_it_button_pressed"]
+[connection signal="pressed" from="PlayItSafe" to="." method="_on_play_it_safe_pressed"]
