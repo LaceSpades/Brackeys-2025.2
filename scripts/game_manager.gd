@@ -25,7 +25,6 @@ var normal_player_pos_x = -760
 var normal_player_pos_y = 531
 
 var encounter_modifier = 0
-var score_modifier = 0
 var flipped = 1
 
 const BLOCK_VALUE = 3
@@ -38,36 +37,36 @@ func _ready() -> void:
 		Globals.reset()
 	elif Globals.current_mode == "health_boost":
 		player.max_health = 2
-		score_modifier -= 1
+		Globals.reduce_score_modifier()
 		player.reset_health()
 	elif Globals.current_mode == "life_boost":
 		Globals.current_player_lives += 3
-		score_modifier -= 1
+		Globals.reduce_score_modifier()
 	elif Globals.current_mode == "enemy_health_boost":
 		Globals.enemy_health = 2
-		score_modifier += 1
+		Globals.increase_score_modifier()
 	elif Globals.current_mode == "double_lives_lost":
 		Globals.life_damage = 2
-		score_modifier += 1
+		Globals.increase_score_modifier()
 	elif Globals.current_mode == "lose_lives":
-		score_modifier += 1
+		Globals.increase_score_modifier()
 		Globals.current_player_lives -= 2
 		if Globals.current_player_lives < 1:
 			Globals.current_player_lives = 1
 	elif Globals.current_mode == "upside_down":
-		score_modifier += 1
+		Globals.increase_score_modifier()
 		camera.zoom.y = -camera.zoom.y
 	elif Globals.current_mode == "flip_sides":
-		score_modifier += 1
+		Globals.increase_score_modifier()
 		flipped = -1
 		player.position.x = 740
 		player.scale.x *= flipped
 		enemy_position_x = -750
 	elif Globals.current_mode == "more_encounters":
-		score_modifier += 1
+		Globals.increase_score_modifier()
 		encounter_modifier = 3
 	elif Globals.current_mode == "whos_who_enemy":
-		score_modifier += 2
+		Globals.increase_score_modifier(2)
 		var temp_player = player_sus.instantiate()
 		add_child(temp_player)
 		temp_player.position.x = player.position.x
@@ -76,9 +75,9 @@ func _ready() -> void:
 		player = temp_player
 		temp_player.game_manager = self
 	elif Globals.current_mode == "whos_who_player":
-		score_modifier += 2
+		Globals.increase_score_modifier(2)
 	elif Globals.current_mode == "reduce_score":
-		score_modifier += 1
+		Globals.increase_score_modifier()
 		Globals.score = Globals.score - (abs(Globals.score)/2)
 
 	transition.self_modulate.a = 0
@@ -157,14 +156,14 @@ func player_hit() -> void:
 		player.die()
 		update_lives()
 	
-	Globals.score -= (DAMAGE_VALUE + score_modifier)
+	Globals.score -= (DAMAGE_VALUE + Globals.score_modifier)
 	
 	end_round()
 
 func enemy_hit() -> void:
 	# Punish player for attacking before being warned
 	if current_enemy.warned_player:
-		Globals.score += (HIT_VALUE + score_modifier)
+		Globals.score += (HIT_VALUE + Globals.score_modifier)
 		current_enemy.take_damage(1)
 		if current_enemy.current_health <= 0:
 			current_enemy.die()
@@ -174,7 +173,8 @@ func enemy_hit() -> void:
 	end_round()
 	
 func bullet_hit() -> void:
-	Globals.score += (BLOCK_VALUE + score_modifier)
+	if current_enemy.warned_player:
+		Globals.score += (BLOCK_VALUE + Globals.score_modifier)
 	end_round()
 	
 func end_round() -> void:
@@ -185,7 +185,7 @@ func end_round() -> void:
 func end_encounter() -> void:
 	if Globals.current_player_lives <= 0:
 		get_tree().call_deferred("change_scene_to_file", "res://scenes/game_over.tscn")
-	if enemies.size() > 0:
+	if enemies.size() > 0 and Globals.score >= 0:
 		current_enemy.queue_free()
 		start_encounter()
 	else:

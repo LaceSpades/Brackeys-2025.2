@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvw346q22gacu"]
+
+[ext_resource type="Script" uid="uid://dymyng0x0u6u5" path="res://scripts/score_modifier.gd" id="1_dcqsk"]
+
+[node name="ScoreModifier" type="Label"]
+script = ExtResource("1_dcqsk")
+
+[connection signal="ready" from="." to="." method="_on_ready"]

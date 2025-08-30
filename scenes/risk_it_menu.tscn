@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c207a2o1hfwdl"]
+[gd_scene load_steps=14 format=3 uid="uid://c207a2o1hfwdl"]
 
 [ext_resource type="AudioStream" uid="uid://bfrfhayyfg1rw" path="res://assets/music/menu.wav" id="1_42gfa"]
 [ext_resource type="Script" uid="uid://3jk03r0ykavj" path="res://scripts/risk_it_menu.gd" id="1_th3bf"]
@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://c1wiw8p0v0m3g" path="res://assets/sprites/button_texture3.png" id="8_grn0u"]
 [ext_resource type="Texture2D" uid="uid://bqwooc1h6dln4" path="res://assets/sprites/button_texture4.png" id="9_t8vm4"]
 [ext_resource type="Texture2D" uid="uid://b3i7jnso2tfkq" path="res://assets/sprites/button_texture.png" id="10_g6om0"]
+[ext_resource type="FontFile" uid="uid://d037h3p8j5dke" path="res://assets/fonts/BAHNSCHRIFT.TTF" id="11_grn0u"]
+[ext_resource type="PackedScene" uid="uid://cvw346q22gacu" path="res://scenes/score_modifier.tscn" id="12_t8vm4"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ir72k"]
 font_size = 70
@@ -92,9 +94,9 @@ texture_normal = ExtResource("8_grn0u")
 
 [node name="ButtonLabel" parent="RiskItButton" instance=ExtResource("7_h5hkh")]
 layout_mode = 0
-offset_left = 331.25
+offset_left = 303.125
 offset_top = 196.875
-offset_right = 646.25
+offset_right = 618.125
 offset_bottom = 313.875
 text = "Risk It"
 
@@ -129,6 +131,63 @@ offset_top = 200.0
 offset_right = 751.625
 offset_bottom = 317.0
 text = "Play It Safe"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 579.0
+offset_top = 508.0
+offset_right = 800.0
+offset_bottom = 585.0
+scale = Vector2(0.4, 0.4)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("11_grn0u")
+theme_override_font_sizes/font_size = 36
+text = "Easy Round
+Lower Scores"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 896.0
+offset_top = 508.0
+offset_right = 1125.0
+offset_bottom = 585.0
+scale = Vector2(0.4, 0.4)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("11_grn0u")
+theme_override_font_sizes/font_size = 36
+text = "Normal Round
+Same Scores"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1209.0
+offset_top = 508.0
+offset_right = 1438.0
+offset_bottom = 585.0
+scale = Vector2(0.4, 0.4)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("11_grn0u")
+theme_override_font_sizes/font_size = 36
+text = "Hard Round
+Higher Scores"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoreModifier" parent="." instance=ExtResource("12_t8vm4")]
+layout_mode = 0
+offset_left = 755.0
+offset_top = 224.0
+offset_right = 1170.0
+offset_bottom = 273.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 23
+text = "1x Score Modifier"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="timeout" from="DisplayTimer" to="." method="_on_display_timer_timeout"]
 [connection signal="pressed" from="RetireButton" to="." method="_on_retire_pressed"]

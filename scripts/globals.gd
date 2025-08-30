@@ -2,6 +2,7 @@ extends Node
 
 var introduced = false;
 var score = 0;
+var score_modifier = 1;
 const DEFAULT_PLAYER_LIVES = 5;
 var current_player_lives = DEFAULT_PLAYER_LIVES
 var safe_modes = ["health_boost", "life_boost"]
@@ -39,9 +40,16 @@ func get_mode_name(mode: String):
 			return "Reduce Score"
 	return ""
 
+func reduce_score_modifier() -> void:
+	score_modifier = max(1, score_modifier-1)
+	
+func increase_score_modifier(amount = 1) -> void:
+	score_modifier += amount
+
 func reset() -> void:
 	reset_player_lives()
 	score = 0
+	score_modifier = 1;
 	enemy_health = 1
 	life_damage = 1
 
