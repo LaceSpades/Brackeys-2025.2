@@ -21,6 +21,9 @@ var current_enemy: Enemy
 var enemy_position_x = 759.0
 var enemy_position_y = 528.0
 
+var normal_player_pos_x = -760
+var normal_player_pos_y = 531
+
 var encounter_modifier = 0
 var flipped = 1
 
@@ -89,11 +92,23 @@ func update_lives() -> void:
 	
 func start_encounter() -> void:
 	current_enemy = enemies.pop_front()
+	current_enemy.position.y = enemy_position_y
 	if Globals.current_mode == "whos_who_player" or Globals.current_mode == "whos_who_enemy":
-		pass
+		var sides = rng.randi_range(0, 1)
+		# Normal
+		if sides == 0:
+			player.position.x = normal_player_pos_x
+			player.scale.x = 1
+			current_enemy.position.x = enemy_position_x
+			current_enemy.scale.x = 1
+		# Flipped
+		else:
+			player.position.x = enemy_position_x
+			player.scale.x = -1
+			current_enemy.position.x = normal_player_pos_x
+			current_enemy.scale.x = -1
 	else:
 		current_enemy.position.x = enemy_position_x
-		current_enemy.position.y = enemy_position_y
 		current_enemy.scale.x *= flipped
 	add_child(current_enemy)
 	

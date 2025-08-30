@@ -34,12 +34,12 @@ size = Vector2(125, 703)
 [node name="Enemy" instance=ExtResource("1_opm33")]
 
 [node name="Sprite" parent="." index="3"]
-position = Vector2(-99, -254)
+position = Vector2(-34, -253)
 scale = Vector2(-0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_tx3pf")
 
 [node name="CollisionShape2D" parent="." index="4"]
-position = Vector2(-80.5, -349.5)
+position = Vector2(-2, -353)
 shape = SubResource("RectangleShape2D_klhq6")
 
 [node name="Warning" parent="." index="5"]

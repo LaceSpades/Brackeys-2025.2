@@ -34,13 +34,13 @@ size = Vector2(348, 599.5)
 [node name="Player" instance=ExtResource("1_cxltc")]
 
 [node name="Sprite" parent="." index="0"]
-position = Vector2(27, -331)
+position = Vector2(112, -334)
 scale = Vector2(-0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_u1t88")
 frame_progress = 0.595533
 
 [node name="CollisionShape2D" parent="." index="1"]
-position = Vector2(-72, -299)
+position = Vector2(88, -306)
 rotation = -3.14159
 scale = Vector2(1, -1)
 shape = SubResource("RectangleShape2D_cxltc")

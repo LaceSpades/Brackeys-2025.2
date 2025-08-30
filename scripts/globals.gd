@@ -21,7 +21,7 @@ func reset_player_lives() -> void:
 	current_player_lives = DEFAULT_PLAYER_LIVES
 	
 func reset_game() -> void:
-	current_mode = "whos_who_enemy"
+	current_mode = "new_game"
 	
 func risk_it(mode: int) -> void:
 	if mode == -1:
