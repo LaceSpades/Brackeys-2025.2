@@ -46,8 +46,8 @@ func update_lives() -> void:
 	
 func start_encounter() -> void:
 	current_enemy = enemies.pop_front()
-	current_enemy.global_position.x = 443.0
-	current_enemy.global_position.y = 312.0
+	current_enemy.global_position.x = 759.0
+	current_enemy.global_position.y = 528.0
 	add_child(current_enemy)
 	
 	start_round()
@@ -63,7 +63,7 @@ func player_attacks() -> void:
 		current_enemy.stop_timers()
 		
 func player_hit() -> void:
-	player.health -= 1
+	player.take_damage(1)
 	if player.health <= 0:
 		player.die()
 		update_lives()
@@ -80,7 +80,7 @@ func enemy_hit() -> void:
 		Globals.score -= 1
 	current_enemy.stop_timers()
 	
-	current_enemy.health -= 1
+	current_enemy.take_damage(1)
 	if current_enemy.health <= 0:
 		current_enemy.die()
 	end_round()

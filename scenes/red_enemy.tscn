@@ -30,6 +30,8 @@ animations = [{
 
 [node name="Enemy" instance=ExtResource("1_fsb3w")]
 
-[node name="Sprite" parent="." index="4"]
+[node name="Sprite" parent="." index="3"]
 sprite_frames = SubResource("SpriteFrames_f3bb0")
-animation = &"idle"
+
+[node name="CollisionShape2D" parent="." index="4"]
+position = Vector2(-81, -347)
