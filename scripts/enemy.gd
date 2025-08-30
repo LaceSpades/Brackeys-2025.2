@@ -9,6 +9,8 @@ class_name Enemy
 @onready var flash_timer: Timer = $FlashTimer
 @onready var muzzle_flash: Sprite2D = $MuzzleFlash
 @onready var hit_marker: Sprite2D = $HitMarker
+@onready var shoot_sound: AudioStreamPlayer = $ShootSound
+@onready var damage_sound: AudioStreamPlayer = $DamageSound
 
 var rng: RandomNumberGenerator;
 var health = 2;
@@ -44,6 +46,7 @@ func _on_timer_timeout() -> void:
 func _on_attack_timer_timeout() -> void:
 	# Spawn bullet to attack player
 	var bullet : Bullet = _bullet.instantiate()
+	shoot_sound.play()
 	add_child(bullet)
 	sprite.animation = "attack"
 	bullet.game_manager = get_parent()
@@ -71,6 +74,7 @@ func die() -> void:
 func take_damage(amount: int) -> void:
 	warning.visible = false
 	warned_player = false
+	damage_sound.play()
 	health -= amount
 	hit_marker.visible = true
 	get_tree().create_timer(0.1).timeout.connect(Callable(self, "remove_hit_marker"))

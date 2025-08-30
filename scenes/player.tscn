@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dvke3s2413ele"]
+[gd_scene load_steps=10 format=3 uid="uid://dvke3s2413ele"]
 
 [ext_resource type="Texture2D" uid="uid://ifsclfax24f2" path="res://assets/sprites/Vendetta_01_Idle_Pose.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://dqvhx7oigbhsi" path="res://scripts/player.gd" id="1_g2els"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c5v17ylj0t853" path="res://scenes/projectile.tscn" id="3_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://htd6ghajr7bw" path="res://assets/sprites/Rifleflash.png" id="5_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://cmrfivk27jbuk" path="res://assets/sprites/Particle_Effects.png" id="6_tuyoq"]
+[ext_resource type="AudioStream" uid="uid://bjxce7q56kbeb" path="res://assets/sounds/vendetta damage.wav" id="7_fjrip"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3vyb7"]
 animations = [{
@@ -65,5 +66,11 @@ visible = false
 position = Vector2(14, -344)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("6_tuyoq")
+
+[node name="ShootSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_fjrip")
+
+[node name="DamageSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_fjrip")
 
 [connection signal="timeout" from="FlashTimer" to="." method="_on_flash_timer_timeout"]

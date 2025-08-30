@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://c0lhvf74c84j4"]
 
-[ext_resource type="Script" uid="uid://cek03g1n1oowd" path="res://scripts/return_to_menu.gd" id="1_wqhvx"]
-[ext_resource type="Script" uid="uid://dsrk42toig50w" path="res://scripts/restart.gd" id="2_wqhvx"]
+[ext_resource type="Script" uid="uid://citemhw73hc3o" path="res://scripts/game_over.gd" id="1_7m3ot"]
 [ext_resource type="LabelSettings" uid="uid://base8q4ybr2yi" path="res://assets/fonts/new_label_settings.tres" id="3_racf3"]
 [ext_resource type="AudioStream" uid="uid://bfrfhayyfg1rw" path="res://assets/music/menu.wav" id="3_tbwuq"]
 [ext_resource type="PackedScene" uid="uid://dwmw14tfmcpe4" path="res://scenes/menu_score.tscn" id="5_7m3ot"]
+[ext_resource type="PackedScene" uid="uid://bjljaa7uh0lj7" path="res://scenes/button.tscn" id="5_v3hpu"]
 
 [node name="GameOver" type="Control"]
 layout_mode = 3
@@ -13,6 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_7m3ot")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
@@ -20,30 +21,12 @@ offset_top = -5.0
 offset_right = 1941.0
 offset_bottom = 1099.0
 
-[node name="Return To Menu" type="Button" parent="."]
+[node name="Title" type="Label" parent="."]
 layout_mode = 0
-offset_left = 890.0
-offset_top = 579.0
-offset_right = 1068.0
-offset_bottom = 647.0
-text = "Return To Menu"
-script = ExtResource("1_wqhvx")
-
-[node name="Restart" type="Button" parent="."]
-layout_mode = 0
-offset_left = 887.0
-offset_top = 398.0
-offset_right = 1065.0
-offset_bottom = 466.0
-text = "Restart"
-script = ExtResource("2_wqhvx")
-
-[node name="Label" type="Label" parent="Restart"]
-layout_mode = 0
-offset_left = -193.0
-offset_top = -377.0
-offset_right = 381.0
-offset_bottom = -175.0
+offset_left = 694.0
+offset_top = 21.0
+offset_right = 1268.0
+offset_bottom = 223.0
 text = "GAME OVER"
 label_settings = ExtResource("3_racf3")
 
@@ -58,5 +41,21 @@ offset_top = 140.0
 offset_right = 1230.0
 offset_bottom = 236.0
 
-[connection signal="pressed" from="Return To Menu" to="Return To Menu" method="_on_pressed"]
-[connection signal="pressed" from="Restart" to="Restart" method="_on_pressed"]
+[node name="Restart" parent="." instance=ExtResource("5_v3hpu")]
+layout_mode = 0
+offset_left = 888.0
+offset_top = 394.0
+offset_right = 1069.0
+offset_bottom = 475.0
+text = "Restart"
+
+[node name="ReturnToMenu" parent="." instance=ExtResource("5_v3hpu")]
+layout_mode = 0
+offset_left = 887.0
+offset_top = 568.0
+offset_right = 1078.0
+offset_bottom = 660.0
+text = "Return To Menu"
+
+[connection signal="pressed" from="Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="ReturnToMenu" to="." method="_on_return_to_menu_pressed"]

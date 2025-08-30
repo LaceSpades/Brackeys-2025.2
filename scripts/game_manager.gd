@@ -16,7 +16,9 @@ var enemies: Array
 var current_enemy: Enemy
 
 func _ready() -> void:
-	Globals.score = 0
+	if Globals.current_mode == "new_game":
+		Globals.reset_player_lives()
+		Globals.score = 0
 	transition.self_modulate.a = 0
 	update_score()
 	update_lives()
@@ -41,7 +43,7 @@ func update_score() -> void:
 	label.text = str(Globals.score)
 	
 func update_lives() -> void:
-	label_3.text = str(Globals.player_lives)
+	label_3.text = str(Globals.current_player_lives)
 	
 func start_encounter() -> void:
 	current_enemy = enemies.pop_front()

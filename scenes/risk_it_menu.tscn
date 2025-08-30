@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://c207a2o1hfwdl"]
+[gd_scene load_steps=6 format=3 uid="uid://c207a2o1hfwdl"]
 
 [ext_resource type="AudioStream" uid="uid://bfrfhayyfg1rw" path="res://assets/music/menu.wav" id="1_42gfa"]
 [ext_resource type="Script" uid="uid://3jk03r0ykavj" path="res://scripts/risk_it_menu.gd" id="1_th3bf"]
 [ext_resource type="LabelSettings" uid="uid://base8q4ybr2yi" path="res://assets/fonts/new_label_settings.tres" id="2_73ms6"]
 [ext_resource type="PackedScene" uid="uid://dwmw14tfmcpe4" path="res://scenes/menu_score.tscn" id="3_5adcy"]
+[ext_resource type="PackedScene" uid="uid://bjljaa7uh0lj7" path="res://scenes/button.tscn" id="5_ir72k"]
 
 [node name="RiskItMenu" type="Control"]
 layout_mode = 3
@@ -16,45 +17,14 @@ script = ExtResource("1_th3bf")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
-offset_top = -5.0
-offset_right = 1941.0
-offset_bottom = 1099.0
+offset_left = -11.0
+offset_top = 13.0
+offset_right = 1930.0
+offset_bottom = 1117.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_42gfa")
 autoplay = true
-
-[node name="Retire" type="Button" parent="."]
-layout_mode = 0
-offset_left = 905.0
-offset_top = 608.0
-offset_right = 960.0
-offset_bottom = 639.0
-text = "Retire"
-
-[node name="KeepGoing" type="Button" parent="."]
-layout_mode = 0
-offset_left = 886.0
-offset_top = 479.0
-offset_right = 982.0
-offset_bottom = 510.0
-text = "Keep Going"
-
-[node name="RiskItButton" type="Button" parent="."]
-layout_mode = 0
-offset_left = 1081.0
-offset_top = 477.0
-offset_right = 1136.0
-offset_bottom = 508.0
-text = "Risk It"
-
-[node name="PlayItSafe" type="Button" parent="."]
-layout_mode = 0
-offset_left = 692.0
-offset_top = 480.0
-offset_right = 785.0
-offset_bottom = 511.0
-text = "Play It Safe"
 
 [node name="Title" type="Label" parent="."]
 layout_mode = 0
@@ -72,7 +42,39 @@ offset_top = 128.0
 offset_right = 1219.0
 offset_bottom = 224.0
 
-[connection signal="pressed" from="Retire" to="." method="_on_retire_pressed"]
-[connection signal="pressed" from="KeepGoing" to="." method="_on_keep_going_pressed"]
-[connection signal="pressed" from="RiskItButton" to="." method="_on_risk_it_button_pressed"]
+[node name="PlayItSafe" parent="." instance=ExtResource("5_ir72k")]
+layout_mode = 0
+offset_left = 585.0
+offset_top = 397.0
+offset_right = 705.0
+offset_bottom = 457.0
+text = "Play It Safe"
+
+[node name="KeepGoing" parent="." instance=ExtResource("5_ir72k")]
+layout_mode = 0
+offset_left = 864.0
+offset_top = 397.0
+offset_right = 1019.0
+offset_bottom = 458.0
+text = "Keep Going"
+
+[node name="RiskIt" parent="." instance=ExtResource("5_ir72k")]
+layout_mode = 0
+offset_left = 1163.0
+offset_top = 399.0
+offset_right = 1307.0
+offset_bottom = 458.0
+text = "Risk It"
+
+[node name="Retire" parent="." instance=ExtResource("5_ir72k")]
+layout_mode = 0
+offset_left = 863.0
+offset_top = 652.0
+offset_right = 1017.0
+offset_bottom = 716.0
+text = "Retire"
+
 [connection signal="pressed" from="PlayItSafe" to="." method="_on_play_it_safe_pressed"]
+[connection signal="pressed" from="KeepGoing" to="." method="_on_keep_going_pressed"]
+[connection signal="pressed" from="RiskIt" to="." method="_on_risk_it_pressed"]
+[connection signal="pressed" from="Retire" to="." method="_on_retire_pressed"]

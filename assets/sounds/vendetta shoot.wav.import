@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dc8qtl7huah4n"
+path="res://.godot/imported/vendetta shoot.wav-f9d55ef4d861a67f372c90e4c5dd1ca6.sample"
+
+[deps]
+
+source_file="res://assets/sounds/vendetta shoot.wav"
+dest_files=["res://.godot/imported/vendetta shoot.wav-f9d55ef4d861a67f372c90e4c5dd1ca6.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

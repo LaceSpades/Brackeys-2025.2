@@ -7,6 +7,8 @@ class_name Player
 @onready var muzzle_flash: Sprite2D = $MuzzleFlash
 @onready var flash_timer: Timer = $FlashTimer
 @onready var hit_marker: Sprite2D = $HitMarker
+@onready var shoot_sound: AudioStreamPlayer = $ShootSound
+@onready var damage_sound: AudioStreamPlayer = $DamageSound
 
 var shot: bool;
 var health = 1;
@@ -25,6 +27,7 @@ func _process(delta: float) -> void:
 	if health > 0:
 		if Input.is_action_just_pressed("interact") and not shot:
 			# Create a bullet
+			shoot_sound.play()
 			var bullet : Bullet = _bullet.instantiate()
 			add_child(bullet)
 			bullet.direction = 1
@@ -41,7 +44,7 @@ func _process(delta: float) -> void:
 			game_manager.player_attacks()
 		
 func die() -> void:
-	Globals.player_lives -= 1
+	Globals.current_player_lives -= 1;
 	sprite.self_modulate.a = 0
 	await get_tree().create_timer(0.2).timeout
 	sprite.self_modulate.a = 1
@@ -54,6 +57,7 @@ func die() -> void:
 	
 func take_damage(amount: int) -> void:
 	health -= amount
+	damage_sound.play()
 	sprite.self_modulate.a = 0
 	hit_marker.visible = true
 	get_tree().create_timer(0.1).timeout.connect(Callable(self, "remove_hit_marker"))

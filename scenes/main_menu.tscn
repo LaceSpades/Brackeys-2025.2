@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://by0wvs4osdwgn"]
+[gd_scene load_steps=5 format=3 uid="uid://by0wvs4osdwgn"]
 
-[ext_resource type="Script" uid="uid://pdkfcufnbctj" path="res://scripts/start_button.gd" id="1_l6cm7"]
+[ext_resource type="Script" uid="uid://rpvvhhfoymcd" path="res://scripts/main_menu.gd" id="1_8ln24"]
 [ext_resource type="AudioStream" uid="uid://bfrfhayyfg1rw" path="res://assets/music/menu.wav" id="2_ekxnf"]
 [ext_resource type="LabelSettings" uid="uid://base8q4ybr2yi" path="res://assets/fonts/new_label_settings.tres" id="3_bqqt6"]
+[ext_resource type="PackedScene" uid="uid://bjljaa7uh0lj7" path="res://scenes/button.tscn" id="5_rtw2f"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -11,21 +12,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_8ln24")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
 offset_top = -5.0
 offset_right = 1924.0
 offset_bottom = 1078.0
-
-[node name="Button" type="Button" parent="."]
-layout_mode = 0
-offset_left = 900.0
-offset_top = 514.0
-offset_right = 1078.0
-offset_bottom = 582.0
-text = "Start Game"
-script = ExtResource("1_l6cm7")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_ekxnf")
@@ -40,4 +33,12 @@ offset_bottom = 158.0
 text = "THE GAME"
 label_settings = ExtResource("3_bqqt6")
 
-[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
+[node name="StartButton" parent="." instance=ExtResource("5_rtw2f")]
+layout_mode = 0
+offset_left = 904.0
+offset_top = 452.0
+offset_right = 1079.0
+offset_bottom = 533.0
+text = "Start Game"
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]

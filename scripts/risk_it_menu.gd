@@ -11,7 +11,7 @@ func _on_keep_going_pressed() -> void:
 	Globals.risk_it(0)
 	return_to_game()
 
-func _on_risk_it_button_pressed() -> void:
+func _on_risk_it_pressed() -> void:
 	Globals.risk_it(1)
 	return_to_game()
 	

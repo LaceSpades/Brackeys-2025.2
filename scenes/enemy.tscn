@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://biicec4xpag0v"]
+[gd_scene load_steps=12 format=3 uid="uid://biicec4xpag0v"]
 
 [ext_resource type="Script" uid="uid://b6w3j3bv5og3d" path="res://scripts/enemy.gd" id="1_md0e3"]
 [ext_resource type="PackedScene" uid="uid://c5v17ylj0t853" path="res://scenes/projectile.tscn" id="2_4ra3w"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://bp4qlqg5sso57" path="res://assets/sprites/Exclamation_mark.png" id="4_c4w8v"]
 [ext_resource type="Texture2D" uid="uid://htd6ghajr7bw" path="res://assets/sprites/Rifleflash.png" id="6_xwavj"]
 [ext_resource type="Texture2D" uid="uid://cmrfivk27jbuk" path="res://assets/sprites/Particle_Effects.png" id="7_nenq2"]
+[ext_resource type="AudioStream" uid="uid://ifcyd5i3sufe" path="res://assets/sounds/robot shoot.wav" id="8_ipns3"]
+[ext_resource type="AudioStream" uid="uid://bbwlbdcaopp3i" path="res://assets/sounds/robot damage.wav" id="9_8qclf"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_md484"]
 animations = [{
@@ -78,6 +80,12 @@ visible = false
 position = Vector2(-112, -431)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("7_nenq2")
+
+[node name="ShootSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_ipns3")
+
+[node name="DamageSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_8qclf")
 
 [connection signal="timeout" from="WarningTimer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
