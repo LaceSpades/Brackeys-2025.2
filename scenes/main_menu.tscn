@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://rpvvhhfoymcd" path="res://scripts/main_menu.gd" id="1_8ln24"]
 [ext_resource type="Texture2D" uid="uid://beh01dsjhe47h" path="res://assets/sprites/Background.png" id="2_8ln24"]
 [ext_resource type="AudioStream" uid="uid://bfrfhayyfg1rw" path="res://assets/music/menu.wav" id="2_ekxnf"]
-[ext_resource type="LabelSettings" uid="uid://base8q4ybr2yi" path="res://assets/fonts/new_label_settings.tres" id="3_bqqt6"]
 [ext_resource type="PackedScene" uid="uid://bjljaa7uh0lj7" path="res://scenes/button.tscn" id="5_rtw2f"]
+[ext_resource type="Texture2D" uid="uid://ikstj3e3n3li" path="res://assets/sprites/Logo.png" id="6_rtw2f"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -30,21 +30,16 @@ texture = ExtResource("2_8ln24")
 stream = ExtResource("2_ekxnf")
 autoplay = true
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 0
-offset_left = 739.0
-offset_top = 21.0
-offset_right = 1240.0
-offset_bottom = 158.0
-text = "THE GAME"
-label_settings = ExtResource("3_bqqt6")
-
 [node name="StartButton" parent="." instance=ExtResource("5_rtw2f")]
-layout_mode = 0
 offset_left = 904.0
-offset_top = 452.0
+offset_top = 555.0
 offset_right = 1079.0
-offset_bottom = 533.0
+offset_bottom = 636.0
 text = "Start Game"
+
+[node name="Logo" type="Sprite2D" parent="."]
+position = Vector2(964, 259)
+scale = Vector2(0.298264, 0.298264)
+texture = ExtResource("6_rtw2f")
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
