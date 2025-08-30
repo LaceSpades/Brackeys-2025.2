@@ -13,7 +13,8 @@ class_name Enemy
 @onready var damage_sound: AudioStreamPlayer = $DamageSound
 
 var rng: RandomNumberGenerator;
-var health = 2;
+var starting_health = 1;
+var current_health = Globals.enemy_health;
 var warned_player: bool;
 
 func _ready() -> void:
@@ -25,7 +26,7 @@ func round_reset() -> void:
 	warned_player = false
 	
 func reset() -> void:
-	health = 1
+	current_health = 1
 
 func stop_timers() -> void:
 	warning_timer.stop()
@@ -75,7 +76,7 @@ func take_damage(amount: int) -> void:
 	warning.visible = false
 	warned_player = false
 	damage_sound.play()
-	health -= amount
+	current_health -= amount
 	hit_marker.visible = true
 	get_tree().create_timer(0.1).timeout.connect(Callable(self, "remove_hit_marker"))
 	await get_tree().create_timer(0.1).timeout

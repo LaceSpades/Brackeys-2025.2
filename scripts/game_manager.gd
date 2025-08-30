@@ -17,13 +17,28 @@ var current_enemy: Enemy
 
 func _ready() -> void:
 	if Globals.current_mode == "new_game":
-		Globals.reset_player_lives()
-		Globals.score = 0
+		Globals.reset()
+	elif Globals.current_mode == "health_boost":
+		player.max_health = 2
+		player.reset_health()
+	elif Globals.current_mode == "life_boost":
+		Globals.current_player_lives += 3
+	elif Globals.current_mode == "enemy_health_boost":
+		Globals.enemy_health = 2
+	elif Globals.current_mode == "double_lives_lost":
+		Globals.life_damage = 2
+	elif Globals.current_mode == "lose_lives":
+		Globals.current_player_lives -= 2
+		if Globals.current_player_lives < 1:
+			Globals.current_player_lives = 1
 	transition.self_modulate.a = 0
 	update_score()
 	update_lives()
 	prepare_run()
 	start_encounter()
+	
+func _process(float) -> void:
+	print(player.current_health)
 	
 func prepare_run() -> void:
 	# Setup multiple encounters in a run
@@ -65,7 +80,7 @@ func player_attacks() -> void:
 		
 func player_hit() -> void:
 	player.take_damage(1)
-	if player.health <= 0:
+	if player.current_health <= 0:
 		player.die()
 		update_lives()
 	
@@ -82,7 +97,7 @@ func enemy_hit() -> void:
 	current_enemy.stop_timers()
 	
 	current_enemy.take_damage(1)
-	if current_enemy.health <= 0:
+	if current_enemy.current_health <= 0:
 		current_enemy.die()
 	end_round()
 	
@@ -106,10 +121,10 @@ func _on_round_timer_timeout() -> void:
 	transition.self_modulate.a = 0
 	
 	# Enemy is dead the fight is over
-	if current_enemy.health <= 0:
+	if current_enemy.current_health <= 0:
 		end_encounter()
-	elif player.health <= 0:
-		if Globals.player_lives <= 0:
+	elif player.current_health <= 0:
+		if Globals.current_player_lives <= 0:
 			get_tree().call_deferred("change_scene_to_file", "res://scenes/game_over.tscn")
 		else:
 			start_round()

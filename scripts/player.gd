@@ -11,20 +11,23 @@ class_name Player
 @onready var damage_sound: AudioStreamPlayer = $DamageSound
 
 var shot: bool;
-var health = 1;
+var max_health = 1
+var current_health = max_health;
 
 func round_reset() -> void:
 	shot = false
-	health = 1
 	sprite.self_modulate.a = 1
 	sprite.animation = "idle"
+	
+func reset_health() -> void:
+	current_health = max_health
 
 func reset() -> void:
 	shot = false
-	health = 1
+	reset_health()
 
 func _process(delta: float) -> void:
-	if health > 0:
+	if current_health > 0:
 		if Input.is_action_just_pressed("interact") and not shot:
 			# Create a bullet
 			shoot_sound.play()
@@ -44,7 +47,7 @@ func _process(delta: float) -> void:
 			game_manager.player_attacks()
 		
 func die() -> void:
-	Globals.current_player_lives -= 1;
+	Globals.current_player_lives -= Globals.life_damage;
 	sprite.self_modulate.a = 0
 	await get_tree().create_timer(0.2).timeout
 	sprite.self_modulate.a = 1
@@ -55,8 +58,11 @@ func die() -> void:
 	await get_tree().create_timer(0.25).timeout
 	sprite.self_modulate.a = 0
 	
+	if Globals.current_player_lives > 0:
+		reset_health()
+	
 func take_damage(amount: int) -> void:
-	health -= amount
+	current_health -= amount
 	damage_sound.play()
 	sprite.self_modulate.a = 0
 	hit_marker.visible = true
