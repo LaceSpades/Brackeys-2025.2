@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://djrmax3b8xifd"]
+
+[ext_resource type="Texture2D" uid="uid://bmaydco4bopq5" path="res://assets/sprites/muted.png" id="1_8iw6p"]
+[ext_resource type="Script" uid="uid://d0qp5c766caae" path="res://scripts/mute_button.gd" id="2_rh6m2"]
+
+[node name="MuteButton" type="TextureButton"]
+scale = Vector2(0.16, 0.16)
+texture_normal = ExtResource("1_8iw6p")
+script = ExtResource("2_rh6m2")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
+[connection signal="ready" from="." to="." method="_on_ready"]

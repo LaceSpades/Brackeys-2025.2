@@ -1,6 +1,7 @@
 extends Node
 
 var introduced = false;
+var muted = false;
 var score = 0;
 var score_modifier = 1;
 const DEFAULT_PLAYER_LIVES = 5;

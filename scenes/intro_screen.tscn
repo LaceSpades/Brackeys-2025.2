@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cuqdxsty4g2ww"]
+[gd_scene load_steps=10 format=3 uid="uid://cuqdxsty4g2ww"]
 
 [ext_resource type="Script" uid="uid://rpvvhhfoymcd" path="res://scripts/main_menu.gd" id="1_dc7ax"]
 [ext_resource type="Texture2D" uid="uid://beh01dsjhe47h" path="res://assets/sprites/Background.png" id="2_14uot"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://b3i7jnso2tfkq" path="res://assets/sprites/button_texture.png" id="7_14uot"]
 [ext_resource type="PackedScene" uid="uid://cixqhdk68uam" path="res://scenes/button_label.tscn" id="7_j5a1a"]
 [ext_resource type="FontFile" uid="uid://d037h3p8j5dke" path="res://assets/fonts/BAHNSCHRIFT.TTF" id="8_a7v8x"]
+[ext_resource type="PackedScene" uid="uid://djrmax3b8xifd" path="res://scenes/mute_button.tscn" id="9_a7v8x"]
 
 [node name="IntroMenu" type="Control"]
 layout_mode = 3
@@ -34,16 +35,16 @@ stream = ExtResource("3_a7v8x")
 autoplay = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(968, 433.5)
+position = Vector2(968, 465.5)
 scale = Vector2(2.39792, 1.72115)
 texture = ExtResource("7_14uot")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
 offset_left = 108.0
-offset_top = 113.0
+offset_top = 145.0
 offset_right = 1848.0
-offset_bottom = 758.0
+offset_bottom = 790.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("8_a7v8x")
 theme_override_font_sizes/font_size = 20
@@ -76,9 +77,9 @@ autowrap_mode = 2
 [node name="ContinueButton" parent="." instance=ExtResource("5_0qdbj")]
 layout_mode = 0
 offset_left = 844.0
-offset_top = 841.0
+offset_top = 873.0
 offset_right = 1804.0
-offset_bottom = 1361.0
+offset_bottom = 1393.0
 script = ExtResource("6_a7v8x")
 
 [node name="ButtonLabel" parent="ContinueButton" instance=ExtResource("7_j5a1a")]
@@ -88,5 +89,11 @@ offset_top = 196.875
 offset_right = 606.625
 offset_bottom = 313.875
 text = "Got It"
+
+[node name="MuteButton" parent="." instance=ExtResource("9_a7v8x")]
+layout_mode = 0
+offset_left = 1839.0
+offset_right = 2344.0
+offset_bottom = 503.0
 
 [connection signal="pressed" from="ContinueButton" to="." method="_on_continue_button_pressed"]

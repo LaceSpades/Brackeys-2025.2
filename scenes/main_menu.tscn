@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://by0wvs4osdwgn"]
+[gd_scene load_steps=9 format=3 uid="uid://by0wvs4osdwgn"]
 
 [ext_resource type="Script" uid="uid://rpvvhhfoymcd" path="res://scripts/main_menu.gd" id="1_8ln24"]
 [ext_resource type="Texture2D" uid="uid://beh01dsjhe47h" path="res://assets/sprites/Background.png" id="2_8ln24"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://ikstj3e3n3li" path="res://assets/sprites/Logo.png" id="6_rtw2f"]
 [ext_resource type="PackedScene" uid="uid://de0kxw2kl0fx" path="res://scenes/texture_button.tscn" id="7_jk1qb"]
 [ext_resource type="PackedScene" uid="uid://cixqhdk68uam" path="res://scenes/button_label.tscn" id="7_oa1go"]
+[ext_resource type="PackedScene" uid="uid://djrmax3b8xifd" path="res://scenes/mute_button.tscn" id="8_tbmy8"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -53,4 +54,11 @@ offset_right = 763.5
 offset_bottom = 304.5
 text = "Start Game"
 
+[node name="MuteButton" parent="." instance=ExtResource("8_tbmy8")]
+layout_mode = 0
+offset_left = 1839.0
+offset_right = 2344.0
+offset_bottom = 503.0
+
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="ready" from="MuteButton" to="." method="_on_mute_button_ready"]
